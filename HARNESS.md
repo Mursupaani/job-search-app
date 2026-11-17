@@ -139,6 +139,12 @@ templates must not be guessed during implementation.
   server, independently of the user's Mac and browser. Follow local daylight-saving
   changes automatically rather than scheduling against a fixed UTC offset.
 - Provide a user-triggered Check now action in addition to the daily schedule.
+- If a scheduled check is missed or fails, automatically catch up when the server
+  and email connection are available again. Check all unprocessed eligible alerts
+  since the last successful run, or since the original import-start timestamp if
+  no run has succeeded. Always preserve the setup cutoff.
+- Persist progress so a failed or interrupted run cannot silently skip alerts;
+  use the same duplicate prevention for scheduled, manual, and catch-up checks.
 - Prevent repeated checks and retries from importing the same email twice.
 - Consolidate repeated appearances of the same position, including appearances
   across supported sources, into one job record. Preserve source references.
@@ -159,7 +165,6 @@ templates must not be guessed during implementation.
 
 ### Open decisions for this section
 
-- Missed-check handling after downtime or a failed scheduled run.
 - Supported message templates, source identification rules, and forwarding format.
 - Retention periods for imported alert content and processing metadata.
 - How changed postings should trigger re-evaluation or another notification.
