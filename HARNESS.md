@@ -163,10 +163,23 @@ templates must not be guessed during implementation.
 - Treat retrieved page content as source data, with the same instruction boundary
   as email content.
 
+### Data retention
+
+- Retain imported email content in the app for 30 days after import, then
+  automatically remove that stored content.
+- Retain job descriptions, scores, CV recommendations, and cover-letter drafts
+  until the user deletes them.
+- Retain technical processing logs for 30 days after each log entry is created,
+  then automatically remove expired entries. Logs must not contain email bodies
+  or credentials.
+- These rules apply only to the app's stored copies. Do not delete or modify
+  messages in Gmail.
+- Expiring imported email content must not delete the associated job records or
+  cause previously processed alerts to be imported again.
+
 ### Open decisions for this section
 
 - Supported message templates, source identification rules, and forwarding format.
-- Retention periods for imported alert content and processing metadata.
 - How changed postings should trigger re-evaluation or another notification.
 
 Incomplete alerts must not be presented as fully assessed job descriptions.
