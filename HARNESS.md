@@ -18,14 +18,14 @@ account from the beginning. Public registration is disabled initially.
 
 ### Supported inputs
 
-- LinkedIn job-alert emails from the user's email account.
+- Job-alert emails from LinkedIn, Duunitori, and Jobly, received in the dedicated
+  Gmail account described in section 2.
 - Job postings pasted directly into the app as text.
 
-Email processing is limited to LinkedIn job alerts. Unrelated email must not be
+Email processing is limited to alerts from these enabled job-search sources. Unrelated email must not be
 read into the matching workflow, stored, logged, or sent to an AI provider.
-The email provider, integration method, and how this boundary is enforced will
-be decided in a later section. Whole-mailbox access is not implicitly approved
-by this requirement.
+The dedicated mailbox and access boundaries are described in section 2.
+The user's main personal mailbox is not connected to the app.
 
 ### Initial capabilities
 
@@ -69,7 +69,7 @@ administration will be defined in a later section.
   application source code.
 - Avoid required dependencies on proprietary services of a particular host.
 - Provide backup and restore procedures for profiles, postings, scores, and drafts.
-- Once deployed to an always-on host, check for LinkedIn alerts at least daily,
+- Once deployed to an always-on host, check for supported job alerts at least daily,
   independently of the user's Mac and without an open browser.
 
 Low cost and control over stored data are priorities; minimal maintenance is
@@ -88,3 +88,65 @@ in a later section.
 The current work is preparation of the harness. This section does not authorize
 starting application implementation, purchasing hosting, connecting to live
 email, or publishing the project.
+
+## 2. Email access and privacy
+
+Status: approved for writing on 17 November 2026. Open decisions are listed below.
+
+### Mailbox and enabled sources
+
+- Use `mursupaani.dev@gmail.com` as the dedicated receiving account.
+- Initially support job alerts from LinkedIn, Duunitori, and Jobly.
+- The user arranges delivery or forwarding of those alerts to this account.
+- The app connects only to this dedicated Gmail account. It does not need
+  credentials for or access to the user's main personal mailbox.
+- Proton Mail is not part of the selected integration.
+- Skip messages from sources that are not explicitly enabled.
+
+### Access boundary
+
+- Use read-only Gmail API access for the dedicated account. Do not request
+  permissions to send, delete, mark messages as read, or otherwise modify mail.
+- Explain during connection that Gmail's read permission applies to the connected
+  mailbox; an application filter is not a provider-enforced per-sender permission.
+- Apply source and date filters before retrieving message bodies. Use only the
+  metadata needed to determine whether a message qualifies.
+- Validate that a candidate is a job alert from an enabled source before sending
+  its content to AI or saving it as an imported alert. Do not treat every message
+  from a job-search site's domain as a job alert.
+- Do not retain unrelated message content or expose it through logs or AI calls.
+- Keep email credentials and OAuth tokens outside source control and out of logs.
+- Treat email content as input data, never as instructions that can expand
+  mailbox access or change the app's permissions.
+
+The exact sender rules, forwarding-header handling, and validation logic must
+be established from representative alerts. Sender addresses and supported
+templates must not be guessed during implementation.
+
+### Initial import and subsequent checks
+
+- Record a fixed import-start timestamp when email setup is completed.
+- Import only eligible alerts received after that timestamp, using the mail
+  provider's recorded receipt time rather than the sender's Date header.
+- Exclude messages already in the mailbox at setup. No historical backfill is
+  enabled by default.
+- Preserve the original cutoff when reconnecting the same account or restarting
+  the app; reconnection must not silently change the import window.
+- Run checks at least daily on the deployed server, independently of the user's
+  Mac and browser. Also provide a user-triggered Check now action.
+- Prevent repeated checks and retries from importing the same email twice.
+- Consolidate repeated appearances of the same position, including appearances
+  across supported sources, into one job record. Preserve source references.
+
+### Open decisions for this section
+
+- How to obtain enough information when an alert contains only a short preview:
+  automatic retrieval of the linked posting, user-pasted full text, or both.
+- Exact daily check time, timezone configuration, and missed-check handling.
+- Supported message templates, source identification rules, and forwarding format.
+- Retention periods for imported alert content and processing metadata.
+- How changed postings should trigger re-evaluation or another notification.
+
+Incomplete alerts must not be presented as fully assessed job descriptions.
+Writing this section does not connect the Gmail account or authorize reading
+live email during harness preparation.
