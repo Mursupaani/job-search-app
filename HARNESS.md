@@ -163,6 +163,18 @@ templates must not be guessed during implementation.
 - Treat retrieved page content as source data, with the same instruction boundary
   as email content.
 
+### Changed postings and repeat notifications
+
+- When updated content for an existing posting is detected during import or
+  retrieval, update the existing job record and automatically re-score it.
+- Send another notification only if the posting newly meets the configured
+  matching thresholds, or important details of a previously matched role change,
+  such as salary, location, or application deadline.
+- Repeated alerts with unchanged posting content must not generate duplicate
+  notifications.
+- Preserve existing CV recommendations and cover-letter drafts for user review;
+  an updated posting must not silently overwrite them or the user's edits.
+
 ### Data retention
 
 - Retain imported email content in the app for 30 days after import, then
@@ -180,7 +192,6 @@ templates must not be guessed during implementation.
 ### Open decisions for this section
 
 - Supported message templates, source identification rules, and forwarding format.
-- How changed postings should trigger re-evaluation or another notification.
 
 Incomplete alerts must not be presented as fully assessed job descriptions.
 Writing this section does not connect the Gmail account or authorize reading
