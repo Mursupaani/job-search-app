@@ -5,6 +5,13 @@ user before writing it. Write or revise a section only when the user explicitly
 instructs you to do so. Unresolved decisions must remain explicit rather than
 being filled in as approved requirements.
 
+The user's approval of project changes also authorizes routine Git operations
+needed to record and sync those changes, including staging, committing, and
+pushing to this project's existing private GitHub repository. Do not ask for
+separate conversational permission for these operations. This does not override
+tool-enforced sandbox restrictions or authorize unrelated changes, destructive
+history rewrites, or changing repository visibility.
+
 ## 1. Scope and operating environment
 
 Status: approved for writing on 17 November 2026.
@@ -196,3 +203,31 @@ templates must not be guessed during implementation.
 Incomplete alerts must not be presented as fully assessed job descriptions.
 Writing this section does not connect the Gmail account or authorize reading
 live email during harness preparation.
+
+## 3. Career profile and preferences
+
+Status: initial workflow approved on 17 November 2026; further decisions remain open.
+
+### CV import and verified profile
+
+- Allow the user to upload a CV in PDF or Word format, or paste its text.
+- Extract work experience, skills, education, and languages into an editable
+  career profile.
+- Let the user review and correct the extracted facts before approving them.
+- Use only user-approved profile facts for job matching, CV recommendations, and
+  cover-letter drafting. Extraction alone does not establish a verified fact.
+- Do not invent qualifications or experience to fill gaps in the CV.
+
+### Guided preferences
+
+- Collect interests and practical preferences through guided questions.
+- Keep preferences separate from factual career information extracted from the CV.
+- The questionnaire's categories and answer formats will be agreed with the user.
+
+### Open decisions for this section
+
+- Which interest and practical-preference categories the guided questions cover.
+- How to distinguish mandatory requirements from preferences and their importance.
+- How later CV uploads, profile corrections, and preference changes affect saved
+  matches and existing drafts.
+- Handling of ambiguous CV extraction and retention of uploaded source documents.
