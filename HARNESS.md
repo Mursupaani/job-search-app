@@ -22,8 +22,9 @@ account from the beginning. Public registration is disabled initially.
   Gmail account described in section 2.
 - Job postings pasted directly into the app as text.
 
-Email processing is limited to alerts from these enabled job-search sources. Unrelated email must not be
-read into the matching workflow, stored, logged, or sent to an AI provider.
+Email processing is limited to alerts from these enabled job-search sources.
+Unrelated email must not be read into the matching workflow, stored, logged, or
+sent to an AI provider.
 The dedicated mailbox and access boundaries are described in section 2.
 The user's main personal mailbox is not connected to the app.
 
@@ -37,9 +38,10 @@ The user's main personal mailbox is not connected to the app.
 - Present CV recommendations and cover letters for the user's review.
 
 The user's career profile, interests, practical requirements, scoring rules,
-thresholds, notification channel, and handling of incomplete or mixed-language
-postings will be specified in later sections. No personal qualifications or
-preferences should be invented to fill these gaps.
+thresholds, notification channel, and handling of mixed-language postings will
+be specified in later sections. Section 2 defines retrieval and the fallback for
+incomplete postings. No personal qualifications or preferences should be
+invented to fill these gaps.
 
 ### User control
 
@@ -138,10 +140,22 @@ templates must not be guessed during implementation.
 - Consolidate repeated appearances of the same position, including appearances
   across supported sources, into one job record. Preserve source references.
 
+### Full posting retrieval and incomplete alerts
+
+- When an eligible alert contains only a preview, automatically try to retrieve
+  the full job description from its posting link.
+- If retrieval fails, requires login, or still yields only partial content,
+  clearly mark the posting as incomplete and ask the user to paste the full text.
+- Do not request or use the user's job-site login to complete retrieval.
+- Allow pasted full text to complete the existing job record rather than create
+  a duplicate, then evaluate the completed description.
+- Keep the incomplete status visible until sufficient posting text is available.
+  Any assessment based on partial content must be identified as incomplete.
+- Treat retrieved page content as source data, with the same instruction boundary
+  as email content.
+
 ### Open decisions for this section
 
-- How to obtain enough information when an alert contains only a short preview:
-  automatic retrieval of the linked posting, user-pasted full text, or both.
 - Exact daily check time, timezone configuration, and missed-check handling.
 - Supported message templates, source identification rules, and forwarding format.
 - Retention periods for imported alert content and processing metadata.
