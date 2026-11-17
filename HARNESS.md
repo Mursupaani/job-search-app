@@ -71,8 +71,9 @@ administration will be defined in a later section.
   application source code.
 - Avoid required dependencies on proprietary services of a particular host.
 - Provide backup and restore procedures for profiles, postings, scores, and drafts.
-- Once deployed to an always-on host, check for supported job alerts at least daily,
-  independently of the user's Mac and without an open browser.
+- Once deployed to an always-on host, check for supported job alerts daily at
+  10:00 Helsinki time, independently of the user's Mac and without an open browser.
+  Also provide a user-triggered Check now action.
 
 Low cost and control over stored data are priorities; minimal maintenance is
 desirable. The prospective server may also host the user's website and other
@@ -134,8 +135,10 @@ templates must not be guessed during implementation.
   enabled by default.
 - Preserve the original cutoff when reconnecting the same account or restarting
   the app; reconnection must not silently change the import window.
-- Run checks at least daily on the deployed server, independently of the user's
-  Mac and browser. Also provide a user-triggered Check now action.
+- Run checks daily at 10:00 in the `Europe/Helsinki` timezone on the deployed
+  server, independently of the user's Mac and browser. Follow local daylight-saving
+  changes automatically rather than scheduling against a fixed UTC offset.
+- Provide a user-triggered Check now action in addition to the daily schedule.
 - Prevent repeated checks and retries from importing the same email twice.
 - Consolidate repeated appearances of the same position, including appearances
   across supported sources, into one job record. Preserve source references.
@@ -156,7 +159,7 @@ templates must not be guessed during implementation.
 
 ### Open decisions for this section
 
-- Exact daily check time, timezone configuration, and missed-check handling.
+- Missed-check handling after downtime or a failed scheduled run.
 - Supported message templates, source identification rules, and forwarding format.
 - Retention periods for imported alert content and processing metadata.
 - How changed postings should trigger re-evaluation or another notification.
