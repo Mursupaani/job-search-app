@@ -1,0 +1,29 @@
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+secrets/
+credentials/
+*.pem
+*.key
+
+# Private application data and local backups
+data/
+private/
+uploads/
+backups/
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+*.eml
+*.mbox
+*.log
+
+# Local machine and development state
+.DS_Store
+.venv/
+__pycache__/
+node_modules/
+dist/
+coverage/
