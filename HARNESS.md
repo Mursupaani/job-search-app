@@ -662,7 +662,7 @@ template import, writing styles, and manual reply logging approved on
 ## 7. Account access and recovery
 
 Status: invitation-only registration, email onboarding, password recovery,
-and session handling approved on 18 November 2026.
+session handling, and account isolation approved on 18 November 2026.
 
 ### Registration and invitations
 
@@ -672,6 +672,20 @@ and session handling approved on 18 November 2026.
   from an administrator to register another account. Keep public sign-ups
   disabled. In the prototype, let the administrator generate a one-time
   invitation link and share it directly with the intended user.
+
+### Account isolation
+
+- Scope profiles, saved postings, companies, documents, and applications to
+  the account that owns them. Two accounts that paste the same posting keep
+  separate records, scores, drafts, and application histories.
+- Check ownership on the server for every read or change, including direct
+  links to previews and downloads. Run background jobs under the account
+  that owns the work.
+- Let the administrator view per-account AI usage and estimated costs as
+  described in section 8. Keep profiles and documents private to their
+  owners in the app.
+- Before inviting users, test with two accounts that submit the same posting.
+  Verify that each account can access only its own records and files.
 
 ### Email onboarding
 
