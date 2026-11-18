@@ -587,3 +587,31 @@ and session handling approved on 18 November 2026.
 - On sign-out, revoke the current session and remembered sign-in on the server.
   After a password reset via email or the server CLI, revoke all sessions and
   remembered sign-ins for that account.
+
+## 8. AI usage, spending, and data protection
+
+Status: per-user AI credentials and encryption approved on 18 November 2026.
+Model selection and spending controls remain open.
+
+### AI connection
+
+- Let each user connect their own OpenAI API key during onboarding or later
+  in **AI settings**. Use only the key for the account that owns the work.
+  Never fall back to the administrator's key or another user's key.
+- Make the key optional. Users without a key can still import and read
+  postings and track applications. AI scoring and drafting require their
+  own connected key.
+- Store the key encrypted on the server under its owning user account.
+  Decrypt it only to make a request on behalf of that account. Let the user
+  replace or remove the key without displaying the saved value. Keep keys
+  out of logs.
+
+### Data encryption
+
+- Encrypt all user data at rest and in transit, including career profiles,
+  saved postings, CVs, cover letters, application records, replies, and backups.
+- Keep encryption keys separate from the stored data. The server may decrypt
+  data as needed for authorized operations such as matching, drafting, and
+  rendering previews.
+- Store account passwords using secure password hashing as described in
+  section 1.
