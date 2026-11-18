@@ -283,9 +283,8 @@ retention approved on 18 November 2026.
 - During review, ask separately whether to use the draft as the template for
   future CVs. If the user confirms, replace the current template with the draft's
   layout and formatting. Keep job-specific wording with the application.
-- Save the approved, editable `.typ` file with its job posting and cover letter.
-  Each file contains the content and layout needed to render it independently of
-  later template edits. Render PDFs on demand without retaining them.
+- Save the editable `.typ` draft with its posting as described in section 6.
+  Render CV PDFs on demand without retaining them.
 - Provide a Delete button for the saved CV and require confirmation before
   removing it. Retain saved CVs until the user confirms deletion.
 
@@ -490,8 +489,9 @@ approved on 18 November 2026.
   indentation, paragraph alignment and spacing, bulleted and numbered lists,
   links, undo and redo, and clear formatting.
 - Use a reusable Typst cover letter template to handle margins and page layout.
-  Pass the editable content and its formatting to the template for rendering.
-  The first version omits tables, images, and custom page layouts.
+  Use the editable content and formatting to generate a standalone `.typ`
+  draft. Update that draft when the user saves edits. The first version omits
+  tables, images, and custom page layouts.
 - Render a PDF preview automatically for the first draft. After edits, let
   the user refresh the preview on demand. **Download PDF** renders the latest
   version, including edits made since the last preview.
@@ -500,8 +500,8 @@ approved on 18 November 2026.
 
 ## 6. Application tracking
 
-Status: application records and manual reply logging approved on
-18 November 2026.
+Status: application records, document storage and reuse, and manual reply
+logging approved on 18 November 2026.
 
 ### Application record
 
@@ -512,6 +512,20 @@ Status: application records and manual reply logging approved on
 - Let the user link the exact versions of the CV and cover letter they used.
   Preserve those versions if the user edits a draft later. The user can mark
   a role **Applied** without linking either document.
+
+### Saved documents and templates
+
+- Automatically save both drafts as standalone `.typ` files with the job
+  posting when they are generated. Let the user reopen either document and
+  render a PDF preview on demand. Saved files render independently of later
+  changes to the default templates.
+- Provide **Use as starting point** to copy a saved CV or cover letter into
+  a draft of the same type for another posting.
+- Provide **Set as default template** to reuse a saved document's layout and
+  formatting as the default template for future drafts of that type.
+- In both reuse workflows, tailor the content to the new posting and check
+  it against the approved career profile. Replace wording specific to the
+  old application, such as the previous recipient's name in the salutation.
 
 ### Replies
 
