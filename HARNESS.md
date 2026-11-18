@@ -275,8 +275,8 @@ retention approved on 18 November 2026.
 - Follow the template's layout. Make only small layout adjustments when the
   content needs more room or the change improves readability.
 - Use only facts from the approved career profile. Describe skills in the
-  posting's language and use its terminology where it accurately reflects the
-  user's skills and experience.
+  application language selected under section 5. Use the posting's terminology
+  where it accurately reflects the user's skills and experience.
 - Show a readable diff against the starting CV content, with a brief explanation
   for each change. Ask the user to approve the draft or request changes. Show the
   revised draft and diff for review after any requested changes.
@@ -456,8 +456,8 @@ Status: approved for writing on 18 November 2026.
 
 ## 5. Cover letters
 
-Status: initial drafting and consistency checks approved on 18 November 2026.
-Language rules for mixed-language postings remain open.
+Status: drafting, consistency checks, and language rules approved on
+18 November 2026.
 
 ### Drafting and review
 
@@ -472,7 +472,11 @@ Language rules for mixed-language postings remain open.
   user to resolve the discrepancy. If either draft is edited, run the check
   again and flag any new conflicts for the user to resolve.
 
-### Open decisions for this section
+### Application language
 
-- How to choose the drafting language for postings written in both Finnish
-  and English.
+- Use the same language, Finnish or English, for the tailored CV and cover
+  letter. Follow any explicit application language specified in the posting.
+- If the posting gives no language instruction, use the language of the main
+  job description. If it is evenly split between Finnish and English, ask the
+  user to choose before drafting.
+- Let the user change the language for both drafts during review.
