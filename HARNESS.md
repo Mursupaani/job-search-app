@@ -606,7 +606,8 @@ and session handling approved on 18 November 2026.
   setup link for the project owner to register the first administrator account.
 - After the first administrator account is created, require an invitation
   from an administrator to register another account. Keep public sign-ups
-  disabled.
+  disabled. In the prototype, let the administrator generate a one-time
+  invitation link and share it directly with the intended user.
 
 ### Email onboarding
 
@@ -617,18 +618,22 @@ and session handling approved on 18 November 2026.
 - Let the user choose the digest recipient address. Default to the sign-in
   email and let the user specify a different address. A recipient address
   does not grant mailbox access.
-- When the dedicated Gmail connection is complete, record the import-start
-  timestamp and begin checking for eligible alerts as described in section 2.
+- When Gmail intake is enabled and the required connection is complete,
+  record the import-start timestamp and begin checking for eligible alerts
+  as described in section 2.
 
 ### Password recovery
 
-- Send a one-time password reset link to the account's verified sign-in
-  email address.
-- Provide a server CLI command as a fallback for administrator recovery.
+- In the prototype, let the administrator generate a short-lived, one-time
+  password reset link from the server for an invited user's account. The
+  administrator shares the link directly so the user can set a new password.
+- Provide a server CLI command for administrator recovery.
   Run it from a terminal on the server, such as over SSH. Prompt for the
   new password without echoing it or passing it as a command-line argument.
   Recovery through this command requires server access and works without
   an app session or email delivery.
+- When email-based recovery is added, verify the sign-in email before
+  allowing a one-time password reset link to be sent to that address.
 
 ### Sessions
 
@@ -643,8 +648,8 @@ and session handling approved on 18 November 2026.
 - Protect actions that change data against cross-site request forgery (CSRF).
   Opening a digest link displays the posting without changing its state.
 - On sign-out, revoke the current session and remembered sign-in on the server.
-  After a password reset via email or the server CLI, revoke all sessions and
-  remembered sign-ins for that account.
+  After any password reset, revoke all sessions and remembered sign-ins for
+  that account.
 
 ## 8. AI usage, spending, and data protection
 
