@@ -1,0 +1,44 @@
+name: Open a development pull request
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch used by the PR
+        required: true
+      title:
+        description: Title of the PR
+        required: true
+      body:
+        description: Description of the PR
+        required: true
+
+permissions: {}
+
+jobs:
+  open:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PR_BRANCH: ${{ inputs.branch }}
+      PR_TITLE: ${{ inputs.title }}
+      PR_BODY: ${{ inputs.body }}
+    steps:
+      - name: Open the pull request once
+        run: |
+          if [[ ! "$PR_BRANCH" =~ ^codex/[a-zA-Z0-9._/-]+$ ]]; then
+            echo "Use a development branch under codex/." >&2
+            exit 1
+          fi
+          existing_pr=$(gh pr list --state open --base main --head "$PR_BRANCH" --json url --jq '.[0].url // empty')
+          if [ -n "$existing_pr" ]; then
+            printf '%s\n' "$existing_pr"
+            exit 0
+          fi
+          gh pr create --base main --head "$PR_BRANCH" --title "$PR_TITLE" --body "$PR_BODY"

@@ -1,0 +1,25 @@
+# Job Search App review guidance
+
+## Code Review Rules
+
+### Check every change for personal information and secrets
+
+- On every review, check the changed files and filenames for sensitive data.
+  Include documentation, configuration, tests and fixtures, screenshots,
+  sample CVs and cover letters, logs, and other generated or exported files.
+  Read the surrounding content when it helps identify what a value represents.
+- Flag real or plausibly real personal details, including names, personal
+  usernames, email addresses, phone numbers, street addresses, local home
+  directory paths, and identifying information in CVs or application records.
+  Consider capitalization, accents, and alternate spellings.
+- Flag embedded credentials and secret material, including API keys, access
+  tokens, passwords, private keys, session cookies, and connection strings
+  that contain credentials. Check for values spread across multiple lines or
+  embedded in examples and logs.
+- Treat an unauthorized exposure of personal information or a credible secret
+  as a blocking finding. Report the file and location, the type of information
+  exposed, and a safe replacement. Redact sensitive values in all review
+  comments and summaries. Use fictional data in examples and fixtures.
+- Public platform identifiers and references to credentials injected at runtime
+  are allowed when they serve a documented purpose. Verify what a value
+  represents before classifying it as sensitive.
