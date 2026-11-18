@@ -1,0 +1,28 @@
+name: Open Codex review test pull request
+
+on:
+  push:
+    branches:
+      - codex/review-smoke-test
+
+jobs:
+  open-pull-request:
+    if: github.repository == 'Mursupaani/job-search-app'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: Mursupaani/job-search-app
+    steps:
+      - name: Open the test pull request once
+        run: |
+          existing_pr=$(gh pr list --state all --base main --head codex/review-smoke-test --json number --jq '.[0].number // empty')
+          if [ -n "$existing_pr" ]; then
+            exit 0
+          fi
+          gh pr create --base main --head codex/review-smoke-test \
+            --title "Test Codex review on a bot-opened pull request" \
+            --body "Test for #1. This branch verifies PR authorship and what Codex records for the reviewed commit. Leave this PR open for the test."
