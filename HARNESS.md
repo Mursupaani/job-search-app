@@ -347,6 +347,13 @@ Status: initial rules approved. Scoring details remain open.
 - Rate day-to-day work, role, and industry from 0.0 to 1.0 and explain each
   rating using details from the posting. Calculate the interests score as the
   sum of the weighted ratings divided by the sum of the included weights.
+- Default to 1.0 for a clear fit, 0.5 for a partial fit, and 0.0 for a
+  clear mismatch across all three dimensions. If there is too little
+  information to assign a rating, mark it **Unknown**.
+- Let the user edit the three decimal ratings in **Matching settings**.
+  Require each value to stay within 0.0 to 1.0. A clear fit must score at
+  least as high as a partial fit, and a partial fit at least as high as a
+  clear mismatch.
 - Leave dimensions marked **No preference** out of the calculation. If every
   interests dimension is marked **No preference**, show the interests score
   as **Not applicable** and skip its minimum for qualification. If a dimension
@@ -437,6 +444,5 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Open decisions for this section
 
-- How individual interests ratings are assigned and how interview answers
-  translate into suggested settings.
+- How interview answers translate into suggested settings.
 - How incomplete postings interact with review and digests.
