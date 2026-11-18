@@ -522,7 +522,9 @@ logging approved on 18 November 2026.
 - Provide **Use as starting point** to copy a saved CV or cover letter into
   a draft of the same type for another posting.
 - Provide **Set as default template** to reuse a saved document's layout and
-  formatting as the default template for future drafts of that type.
+  formatting as the default template for future drafts of that type. Ask the
+  user to confirm which default will be replaced. Change it only after the
+  user selects **Replace default**.
 - In both reuse workflows, tailor the content to the new posting and check
   it against the approved career profile. Replace wording specific to the
   old application, such as the previous recipient's name in the salutation.
