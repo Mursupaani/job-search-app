@@ -276,6 +276,25 @@ retention approved on 18 November 2026.
 
 Status: initial rules approved. Scoring details remain open.
 
+### Setup interview and score minimums
+
+- During setup, interview the user about their skills, interests, and practical
+  requirements. Use their answers to suggest a starting minimum for each score.
+- Show the three suggested minimums and briefly explain each suggestion. Let
+  the user adjust any minimum before confirming it.
+- Offer a more detailed interview for any category the user is unsure about.
+  Use concrete examples and present a revised suggestion for that category for
+  the user to review and adjust.
+
+### Skills scoring
+
+- Give essential employer requirements more weight than bonus skills. Give
+  partial credit when the approved profile shows relevant experience.
+- Explain which requirements the user fully meets, partly meets, or has no
+  confirmed experience for. Gaps in employer requirements affect the skills
+  score and do not independently disqualify a posting. The user's own
+  must-haves still apply separately.
+
 ### Qualification and review
 
 - Score skills, interests, and practical fit separately. Explain each score.
@@ -291,6 +310,10 @@ Status: initial rules approved. Scoring details remain open.
   minimum and the other two pass. Apply this rule equally to skills, interests,
   and practical fit. A confirmed must-have mismatch prevents automatic
   qualification.
+- Also put a posting in **Needs review** when its interests score meets the
+  minimum but its skills score falls short, even if practical fit also falls
+  short. Explain what makes the role interesting and where the user's
+  experience falls short.
 - Give each **Needs review** posting a short summary explaining why review is
   needed. Identify what needs checking or show the score that fell short, its
   minimum, and the reason for the shortfall.
@@ -309,5 +332,5 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Open decisions for this section
 
-- How each score is calculated and whether to offer starting minimums or ask
-  the user to choose them during setup.
+- The exact scoring formulas, including weights and partial credit, and how
+  interview answers translate into suggested minimums.
