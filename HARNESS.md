@@ -733,9 +733,12 @@ approved on 18 November 2026.
 - In the prototype, let the administrator delete an invited account from
   the server at the user's request. Give the user a chance to download
   their CVs and cover letters using the existing document controls.
+- Before deletion, let the administrator copy a final AI usage breakdown for
+  private settlement. Include the billing month, token count, estimated cost,
+  and any unconfirmed usage.
 - Revoke the account's sessions and remembered sign-ins, cancel queued work,
   and remove the account's profile, postings, companies, saved documents,
-  application history, and replies.
+  application history, replies, and per-account AI usage history.
 - Defer self-service account deletion and full data export.
 
 ### Sessions
