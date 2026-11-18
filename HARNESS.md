@@ -206,7 +206,8 @@ live email during harness preparation.
 
 ## 3. Career profile and preferences
 
-Status: initial workflow approved on 17 November 2026; further decisions remain open.
+Status: initial workflow approved on 17 November 2026. CV generation and source
+retention approved on 18 November 2026.
 
 ### CV import and verified profile
 
@@ -217,6 +218,8 @@ Status: initial workflow approved on 17 November 2026; further decisions remain 
 - Use only user-approved profile facts for job matching, CV recommendations, and
   cover-letter drafting. Extraction alone does not establish a verified fact.
 - Do not invent qualifications or experience to fill gaps in the CV.
+- Flag unclear extracted CV details for the user to correct, confirm, or skip.
+- Retain the original uploaded CV until the user manually deletes it.
 
 ### Guided preferences
 
@@ -247,17 +250,24 @@ Status: initial workflow approved on 17 November 2026; further decisions remain 
 - Keep existing scores for postings marked **Applied** and preserve existing
   drafts regardless of application status.
 
-### Application CVs and unclear profile facts
+### Application CVs
 
-- Keep the edited CV with its job posting and cover letter as part of the
-  application record.
+- Keep one reusable Typst template for CV layout and formatting. When a posting
+  qualifies, generate a tailored, standalone `.typ` draft from the current
+  template. Draft generation leaves the template intact.
+- Follow the template's layout. Make only small layout adjustments when the
+  content needs more room or the change improves readability.
+- Use only facts from the approved career profile. Describe skills in the
+  posting's language and use its terminology where it accurately reflects the
+  user's skills and experience.
+- Show a readable diff against the starting CV content, with a brief explanation
+  for each change. Ask the user to approve the draft or request changes. Show the
+  revised draft and diff for review after any requested changes.
+- During review, ask separately whether to use the draft as the template for
+  future CVs. If the user confirms, replace the current template with the draft's
+  layout and formatting. Keep job-specific wording with the application.
+- Save the approved, editable `.typ` file with its job posting and cover letter.
+  Each file contains the content and layout needed to render it independently of
+  later template edits. Render PDFs on demand without retaining them.
 - Provide a Delete button for the saved CV and require confirmation before
   removing it. Retain saved CVs until the user confirms deletion.
-- Flag unclear extracted CV details for the user to correct, confirm, or skip.
-  Use only confirmed profile facts for matching and drafting.
-
-### Open decisions for this section
-
-- Retention of the original uploaded source file, separate from the edited CV
-  saved with an application.
-- Choice of editable CV format and export workflow.
