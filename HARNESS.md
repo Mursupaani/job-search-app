@@ -640,25 +640,20 @@ and session handling approved on 18 November 2026.
 
 ## 8. AI usage, spending, and data protection
 
-Status: per-user AI credentials, encryption, model settings, and monthly
-usage controls approved on 18 November 2026.
+Status: shared AI connection, per-account usage tracking, encryption,
+model settings, and monthly usage controls approved on 18 November 2026.
 
 ### AI connection
 
-- Let each user connect their own OpenAI API key during onboarding or later
-  in **AI settings**. Use only the key for the account that owns the work.
-  Never fall back to the administrator's key or another user's key.
-- Make the key optional. Users without a key can still import and read
-  postings and track applications. AI scoring and drafting require their
-  own connected key.
-- Store the key encrypted on the server under its owning user account.
-  Decrypt it only to make a request on behalf of that account. Let the user
-  replace or remove the key without displaying the saved value. Keep keys
-  out of logs.
+- Let the administrator configure one OpenAI project API key on the server.
+  All app accounts use this shared connection. OpenAI bills the project.
+- Store the key encrypted on the server. Keep it out of user-facing settings
+  and logs. If the administrator has not configured the key, users can still
+  add and read postings and track applications.
 
 ### Model selection
 
-- Use the user's key on the server to list available models with
+- Use the shared project key on the server to list available models with
   `GET /v1/models`. Filter the results to models the app supports for each task.
 - In **AI settings**, let the user choose models separately for assessment
   and for drafting and cross-checking. Let the user choose the same model
@@ -666,10 +661,14 @@ usage controls approved on 18 November 2026.
 
 ### Monthly AI limits
 
-- Let each user set a monthly token limit in **AI settings**. Count input and
-  output tokens from this app's requests for that user using the usage
-  reported by the Responses API. Show tokens used, tokens remaining, and
-  when the limit resets.
+- Attribute each AI request to the account that owns the work, including
+  requests started by background jobs. Record input and output tokens
+  reported by the Responses API and the estimated cost for that request
+  when pricing is available.
+- Let each user set a monthly token limit in **AI settings**. Show their own
+  tokens used, tokens remaining, estimated spending, and when the limit
+  resets. Show the administrator a monthly usage and estimated cost
+  breakdown by account so users can settle their share privately.
 - Warn the user when usage reaches 90% of their monthly token limit. Inform
   them again when the limit prevents a request from starting.
 - Offer an optional monthly spending cap, off by default. The user chooses
