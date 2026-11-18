@@ -64,10 +64,11 @@ does not authorize sending them to an employer.
 - Start with one administrator account for the project owner.
 - Protect private app pages, stored data, and API endpoints with authentication.
 - Store passwords using secure password hashing, never as plaintext.
-- Keep public registration disabled; additional accounts may be introduced later.
+- Keep public registration disabled. Create accounts through the setup and
+  invitation flow in section 7.
 
-Account provisioning, password recovery, session handling, and future user
-administration will be defined in a later section.
+Section 7 covers account provisioning. Password recovery and session handling
+remain open.
 
 ### Deployment and background operation
 
@@ -105,11 +106,12 @@ Status: approved for writing on 17 November 2026. Open decisions are listed belo
 
 ### Mailbox and enabled sources
 
-- Use `mursupaani.dev@gmail.com` as the dedicated receiving account.
+- Use `mursupaani.dev@gmail.com` as the project owner's dedicated Gmail account.
 - Initially support job alerts from LinkedIn, Duunitori, and Jobly.
 - The user arranges delivery or forwarding of those alerts to this account.
-- The app connects only to this dedicated Gmail account. It does not need
-  credentials for or access to the user's main personal mailbox.
+- Connect only the dedicated Gmail account configured for each user as
+  described in section 7. The app does not need access to the user's main
+  personal mailbox.
 - Proton Mail is not part of the selected integration.
 - Skip messages from sources that are not explicitly enabled.
 
@@ -535,3 +537,28 @@ logging approved on 18 November 2026.
   and paste the message or summarize it in their own words.
 - Show logged replies in a timeline so the user can keep a record of multiple
   updates, such as an interview invitation followed by a hiring decision.
+
+## 7. Account access and recovery
+
+Status: invitation-only registration and email onboarding approved on
+18 November 2026. Recovery and session handling remain open.
+
+### Registration and invitations
+
+- Provide a browser registration page. During deployment, create a one-time
+  setup link for the project owner to register the first administrator account.
+- After the first administrator account is created, require an invitation
+  from an administrator to register another account. Keep public sign-ups
+  disabled.
+
+### Email onboarding
+
+- During registration, collect the user's sign-in email as part of creating
+  the app account. Then let the user connect a dedicated Gmail account through
+  Google for importing job alerts and sending notification digests with the
+  permissions in section 2.
+- Let the user choose the digest recipient address. Default to the sign-in
+  email and let the user specify a different address. A recipient address
+  does not grant mailbox access.
+- When the dedicated Gmail connection is complete, record the import-start
+  timestamp and begin checking for eligible alerts as described in section 2.
