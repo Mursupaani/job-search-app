@@ -238,8 +238,15 @@ Status: initial workflow approved on 17 November 2026; further decisions remain 
   optional follow-up with examples and leave the preference open if the user
   remains unsure.
 
+### Application status and re-scoring
+
+- In the first version, the user selects **Mark as applied** after submitting an
+  application themselves.
+- When the user updates their approved career profile or preferences,
+  automatically re-score saved postings they have yet to apply to.
+- Keep existing scores for postings marked **Applied** and preserve existing
+  drafts regardless of application status.
+
 ### Open decisions for this section
 
-- How later CV uploads, profile corrections, and preference changes affect saved
-  matches and existing drafts.
 - Handling of ambiguous CV extraction and retention of uploaded source documents.
