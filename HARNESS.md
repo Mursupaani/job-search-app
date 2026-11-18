@@ -237,6 +237,13 @@ retention, and profile page approved on 18 November 2026.
 - Allow the user to upload a CV in PDF or `.docx` format, or paste its text.
 - Extract work experience, skills, education, and languages into an editable
   career profile.
+- Let the career profile hold more detail than any individual CV. Record how
+  the user applied a skill, how long and how recently they used it, their
+  responsibilities, and concrete examples or outcomes when available. Capture
+  relevant context, such as the industry or scale of the work.
+- Collect this detail from the original CV, profile edits, and short follow-up
+  interviews. Save confirmed facts in the profile so they can be reused across
+  postings without asking the user to confirm them again.
 - Let the user review and correct the extracted facts before approving them.
 - Use only user-approved profile facts for job matching, CV recommendations, and
   cover-letter drafting. Extraction alone does not establish a verified fact.
@@ -309,7 +316,9 @@ retention, and profile page approved on 18 November 2026.
   template. Draft generation leaves the template intact.
 - Follow the template's layout. Make only small layout adjustments when the
   content needs more room or the change improves readability.
-- Use only facts from the approved career profile. Describe skills in the
+- Select and condense approved career-profile facts that are most relevant to
+  the posting and fit the CV layout. Tailor the wording and emphasis to each
+  posting without changing the underlying facts. Describe skills in the
   application language selected under section 5. Use the posting's terminology
   where it accurately reflects the user's skills and experience.
 - Let the user edit the CV draft in the app.
@@ -790,6 +799,10 @@ on 18 November 2026.
 - Send only the information needed for the specific AI task. For assessment
   and drafting, use relevant approved career facts, preferences, and posting
   text. Apply the same restriction to writing samples and consistency checks.
+- For scoring, send only the confirmed profile details needed to assess the
+  posting. Keep the user's employer and project names on the server. Use
+  relevant context such as responsibilities, duration, industry, or scale
+  when it helps assess a requirement.
 - Extract text from CVs and cover letters on the app server. Keep the
   original files and the user's identifying details on the server. Remove
   names, email addresses, phone numbers, street addresses, personal links,
