@@ -480,3 +480,5 @@ Status: drafting, consistency checks, and language rules approved on
   job description. If it is evenly split between Finnish and English, ask the
   user to choose before drafting.
 - Let the user change the language for both drafts during review.
+- Keep the official names, spelling, and capitalization of tools, frameworks,
+  libraries, and products in both drafts. Translate the surrounding text.
