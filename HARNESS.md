@@ -547,8 +547,10 @@ approved on 18 November 2026.
   approved profile and cross-check the two drafts against each other. Check
   claims about dates, titles, qualifications, skills, and responsibilities.
 - Show the relevant passages together when the drafts conflict and ask the
-  user to resolve the discrepancy. If either draft is edited, run the check
-  again and flag any new conflicts for the user to resolve.
+  user to resolve the discrepancy.
+- After the user saves a wording change in either draft, run the consistency
+  check again and flag any new conflicts. Formatting, layout, and photo
+  changes do not trigger an AI check.
 
 ### Application language
 
