@@ -809,6 +809,18 @@ on 18 November 2026.
 - Explain API provider rate or spending limits separately from limits set in
   this app.
 
+### AI request retries
+
+- Retry automatically only when the failure is retryable and the app can
+  confirm the earlier attempt was never processed. Release the reservation
+  for that attempt and check the limits again before retrying.
+- If a request may have been processed but no result is confirmed, show
+  **Couldn't confirm completion** and let the user choose whether to retry.
+  Show that attempt's estimated usage separately from confirmed usage and
+  count its reservation against the remaining allowance until the usage is
+  confirmed or the relevant monthly limit resets. Apply the normal limits
+  to any new attempt.
+
 ### Pricing and currency conversion
 
 - Keep an administrator-editable price table in the database for supported
