@@ -501,8 +501,8 @@ approved on 18 November 2026.
 
 ## 6. Application tracking
 
-Status: application records, document storage and reuse, and manual reply
-logging approved on 18 November 2026.
+Status: application records, document storage and reuse, template import,
+writing styles, and manual reply logging approved on 18 November 2026.
 
 ### Application record
 
@@ -529,6 +529,30 @@ logging approved on 18 November 2026.
 - In both reuse workflows, tailor the content to the new posting and check
   it against the approved career profile. Replace wording specific to the
   old application, such as the previous recipient's name in the salutation.
+
+### Template import and writing style
+
+- Offer optional CV and cover letter uploads during onboarding and later in
+  **Template settings**. Allow the user to upload either document or both.
+  For each document, let the user recreate the uploaded layout in Typst or
+  use the built-in layout. Use the built-in layout when no sample is supplied.
+- An uploaded CV can also supply career facts for review under section 3.
+  Approve those facts separately from the template. Use a cover letter upload
+  as a reference for layout and structure.
+- Offer six writing styles: **Formal**, **Relaxed**, **Playful**,
+  **Direct and concise**, **Warm and personable**, and
+  **Confident and results-focused**. Let the user choose a default separately
+  for each document and change it during draft review.
+- Offer **Match my style** alongside the presets. Let the user reuse an
+  uploaded CV or cover letter as a writing sample, upload a separate sample,
+  or paste sample text. Allow different samples for the two document types
+  and let the user replace them in settings.
+- Let the user choose the layout and writing style independently. A writing
+  sample guides tone, vocabulary, and phrasing. Tailor the draft to the new
+  posting and use the approved profile for factual claims.
+- Show a rendered sample so the user can review the layout and how the
+  writing reads. Use the same facts when previewing different styles.
+  Ask for confirmation before replacing a default.
 
 ### Replies
 
