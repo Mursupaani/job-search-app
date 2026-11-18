@@ -288,12 +288,26 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Skills scoring
 
-- Give essential employer requirements more weight than bonus skills. Give
-  partial credit when the approved profile shows relevant experience.
+- By default, give essential employer requirements a weight of 2.0 and bonus
+  skills a weight of 1.0. Multiply each weight by 1.0 for a full match, 0.5 for
+  a partial match supported by the approved profile, or 0.0 for a clear gap.
+- If an unknown skill requirement could change whether the posting qualifies,
+  explain what is unclear and put the posting in **Needs review**.
 - Explain which requirements the user fully meets, partly meets, or has no
   confirmed experience for. Gaps in employer requirements affect the skills
   score and do not independently disqualify a posting. The user's own
   must-haves still apply separately.
+
+### Matching settings
+
+- Provide a settings page where the user can adjust all scoring parameters
+  without editing code, including the three score minimums, skills weights and
+  credit values, and the weights and cutoffs for interests and practical fit.
+- Use floating-point values for scoring parameters and display them as decimals.
+  Provide a slider for the essential-to-bonus weight ratio, starting at 2.0.
+- When the user saves scoring changes, re-score saved postings they have yet
+  to apply to. Preserve scores for postings marked **Applied** and keep existing
+  drafts, as in section 3.
 
 ### Qualification and review
 
@@ -332,5 +346,6 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Open decisions for this section
 
-- The exact scoring formulas, including weights and partial credit, and how
-  interview answers translate into suggested minimums.
+- How weighted skills points translate to the final skills score, how interests
+  and practical fit are scored, and how interview answers translate into
+  suggested minimums.
