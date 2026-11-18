@@ -456,8 +456,8 @@ Status: approved for writing on 18 November 2026.
 
 ## 5. Cover letters
 
-Status: drafting, consistency checks, and language rules approved on
-18 November 2026.
+Status: drafting, consistency checks, language rules, editing, and export
+approved on 18 November 2026.
 
 ### Drafting and review
 
@@ -482,3 +482,18 @@ Status: drafting, consistency checks, and language rules approved on
 - Let the user change the language for both drafts during review.
 - Keep the official names, spelling, and capitalization of tools, frameworks,
   libraries, and products in both drafts. Translate the surrounding text.
+
+### Editing, preview, and export
+
+- Save the editable cover letter with its application and let the user edit it
+  in a rich text editor. Include font family, size, and color, bold, italics,
+  indentation, paragraph alignment and spacing, bulleted and numbered lists,
+  links, undo and redo, and clear formatting.
+- Use a reusable Typst cover letter template to handle margins and page layout.
+  Pass the editable content and its formatting to the template for rendering.
+  The first version omits tables, images, and custom page layouts.
+- Render a PDF preview automatically for the first draft. After edits, let
+  the user refresh the preview on demand. **Download PDF** renders the latest
+  version, including edits made since the last preview.
+- Provide **Copy letter** for application forms. Copy plain text with readable
+  paragraph breaks and list markers.
