@@ -590,8 +590,8 @@ and session handling approved on 18 November 2026.
 
 ## 8. AI usage, spending, and data protection
 
-Status: per-user AI credentials and encryption approved on 18 November 2026.
-Model selection and spending controls remain open.
+Status: per-user AI credentials, encryption, and monthly usage controls
+approved on 18 November 2026. Model selection remains open.
 
 ### AI connection
 
@@ -605,6 +605,26 @@ Model selection and spending controls remain open.
   Decrypt it only to make a request on behalf of that account. Let the user
   replace or remove the key without displaying the saved value. Keep keys
   out of logs.
+
+### Monthly AI limits
+
+- Let each user set a monthly token limit in **AI settings**. Count input and
+  output tokens from this app's requests for that user. Show tokens used,
+  tokens remaining, and when the limit resets.
+- Warn the user when usage reaches 90% of their monthly token limit. Inform
+  them again when the limit prevents a request from starting.
+- Offer an optional monthly spending cap, off by default. The user chooses
+  a cap in USD or EUR. When enabled, enforce it against estimated API charges
+  from this app.
+- Check the USD-to-EUR exchange rate once per day. Use that rate to convert
+  USD charges for calculations against a euro cap.
+- Before starting an AI request, check whether it would exceed the remaining
+  monthly token allowance or the enabled spending cap. Queue the work if it
+  exceeds either limit and tell the user which limit blocked it. Continue
+  importing job alerts and allow manual editing. Queued work can resume when
+  the relevant limit resets or the user raises it.
+- Explain API provider rate or spending limits separately from limits set in
+  this app.
 
 ### Data encryption
 
