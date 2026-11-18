@@ -358,12 +358,15 @@ Status: initial rules approved. Scoring details remain open.
   change whether it qualifies. Show other unknowns in the score explanation.
 - Also put a posting in **Needs review** when exactly one score falls below its
   minimum and the other two pass. Apply this rule equally to skills, interests,
-  and practical fit. A confirmed must-have mismatch prevents automatic
-  qualification.
+  and practical fit.
 - Also put a posting in **Needs review** when its interests score meets the
   minimum but its skills score falls short, even if practical fit also falls
   short. Explain what makes the role interesting and where the user's
   experience falls short.
+- A confirmed must-have mismatch prevents automatic qualification. If the
+  posting otherwise qualifies or meets a review rule, put it in **Needs
+  review** and include it in the review digest when eligible for notification.
+  Identify the failed must-have in the review summary.
 - Give each **Needs review** posting a short summary explaining why review is
   needed. Identify what needs checking or show the score that fell short, its
   minimum, and the reason for the shortfall.
@@ -384,3 +387,5 @@ Status: initial rules approved. Scoring details remain open.
 
 - How individual interests ratings and practical fit scores are calculated,
   and how interview answers translate into suggested settings.
+- Whether the user can request a CV draft for a posting that fails a confirmed
+  must-have, and how incomplete postings interact with review and digests.
