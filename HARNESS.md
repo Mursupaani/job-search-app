@@ -218,8 +218,8 @@ live email during harness preparation.
 
 ## 3. Career profile and preferences
 
-Status: initial workflow approved on 17 November 2026. CV generation and source
-retention approved on 18 November 2026.
+Status: initial workflow approved on 17 November 2026. CV generation, source
+retention, and profile page approved on 18 November 2026.
 
 ### CV import and verified profile
 
@@ -232,6 +232,24 @@ retention approved on 18 November 2026.
 - Do not invent qualifications or experience to fill gaps in the CV.
 - Flag unclear extracted CV details for the user to correct, confirm, or skip.
 - Retain the original uploaded CV until the user manually deletes it.
+
+### Profile page and application details
+
+- Provide an editable profile page for the user's name as it should appear on
+  applications, an optional professional headline and short introduction,
+  and their country, city, and street address.
+- Let the user set the contact email and phone number for CVs and cover letters.
+  Keep the application contact email separate from the account's sign-in email.
+- Support custom links with a label and URL. Examples include GitHub, LinkedIn,
+  a portfolio or homepage, a live project demo, an app store listing, a
+  technical blog, an open source contribution, or a certificate verification
+  page.
+- Let the user choose which contact details and links to include separately
+  on the CV and cover letter. Default to city and country for location.
+  Include the street address only if selected.
+- Let the user upload a profile photo and choose whether to include it when
+  reviewing a CV draft. Leave the photo off by default. Omit the photo from
+  cover letters.
 
 ### Guided preferences
 
