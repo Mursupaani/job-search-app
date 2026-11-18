@@ -291,7 +291,7 @@ retention approved on 18 November 2026.
 
 ## 4. Job matching and notifications
 
-Status: initial rules approved. Scoring details remain open.
+Status: approved for writing on 18 November 2026.
 
 ### Setup interview and scoring settings
 
@@ -299,6 +299,9 @@ Status: initial rules approved. Scoring details remain open.
   requirements. Suggest starting minimums for skills, interests, and practical
   fit directly from the interview answers, without requiring a separate round
   of rating sample postings.
+- Ask how close a fit a posting should be to qualify automatically for each
+  category. Map **Open to a stretch** to 0.5, **Solid match** to 0.7, and
+  **Close match** to 0.85. Apply the same mapping separately to each category.
 - Show the three suggested minimums and briefly explain each suggestion. Let
   the user adjust any minimum before confirming it and edit it later in
   **Matching settings**.
@@ -449,7 +452,3 @@ Status: initial rules approved. Scoring details remain open.
   They become eligible for the matches or **Needs review** digest once there
   is enough information to complete the assessment.
 - Apply the repeat notification rules for changed postings in section 2.
-
-### Open decisions for this section
-
-- How the app maps interview answers to specific suggested values.
