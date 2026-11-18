@@ -17,3 +17,8 @@ jobs:
         with:
           persist-credentials: false
       - run: python3 -B -m unittest discover -s .github/scripts -p 'test_*.py' -v
+      - name: Demonstrate a failed CI rerun before merge
+        if: github.ref_name == 'codex/verify-merge-protection' && github.run_attempt != '1'
+        run: |
+          echo "Intentional failure for the merge protection test."
+          exit 1

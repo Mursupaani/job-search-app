@@ -601,11 +601,15 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
   the built-in GitHub Actions bot to open pull requests. The user reviews with
   their existing account. Each issue describes the expected behavior, how to
   verify it, and what the user will learn about the stack.
-- Require two sign-offs on the latest revision before merging. An independent
-  agent reviews the changes automatically and reports its verdict as a
-  required GitHub status check on the exact commit it reviewed. The agent can
-  run the review outside GitHub. The user submits a formal **Approve** review
-  on GitHub. Require both sign-offs and passing CI checks before merge.
+- Require two sign-offs on the latest revision before merging. For the prototype,
+  Codex waits for CI to pass on the commit it intends to present, then posts
+  `@codex review` to request an independent Codex review. GitHub Actions
+  automatically publishes the verdict as a required check on the reviewed
+  commit.
+- When CI and the Codex verdict both pass, Codex asks the user for a formal
+  **Approve** review on GitHub. Each new commit requires CI, a fresh Codex
+  verdict, and a fresh user approval. Require both sign-offs and passing CI
+  before merge.
 - During CI setup, use a small PR to verify that the bot can open a PR, the user
   can approve it, and GitHub enforces both sign-offs and the CI checks in the
   public repository. If GitHub asks the user to select **Approve workflows to
