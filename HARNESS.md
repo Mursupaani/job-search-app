@@ -341,6 +341,14 @@ Status: approved for writing on 18 November 2026.
 - Use the initial interview to suggest personalized weights and practical
   preference values as well as score minimums. Let the user adjust the
   suggestions before confirming them.
+- When a posting introduces a relevant factor the user has not covered,
+  offer a short follow-up interview. Recognize equivalent wording so the
+  app can reuse an existing answer. Save confirmed answers for future
+  assessments.
+- For a new preference, offer **No preference** and **I'm not sure yet**.
+  Treat unanswered or undecided factors as **Unknown** and flag them for
+  review when they could change the outcome. For a new skill, ask about the
+  user's experience and add it to the profile only after they confirm it.
 
 ### Skills scoring
 
@@ -392,18 +400,20 @@ Status: approved for writing on 18 November 2026.
   Require each value to stay within 0.0 to 1.0. A clear fit must score at
   least as high as a partial fit, and a partial fit at least as high as a
   clear mismatch.
-- Leave dimensions marked **No preference** out of the calculation. If every
-  interests dimension is marked **No preference**, show the interests score
-  as **Not applicable** and skip its minimum for qualification. If a dimension
-  matters to the user but the posting leaves it unclear, show a score range
-  and flag it for review if the uncertainty could change whether the posting
-  qualifies.
+- Leave dimensions marked **No preference** or weighted zero out of the
+  calculation. If no active criteria remain, show **Not applicable** and
+  skip the interests minimum. If an active dimension is unclear, show a
+  score range and flag it for review if the uncertainty could change whether
+  the posting qualifies.
 
 ### Practical fit scoring
 
 - Rate practical preferences from 0.0 to 1.0. Use the setup interview to
   identify the factors that matter to the user and suggest preference levels.
   Calculate practical fit as the weighted average of those ratings.
+- Leave practical factors marked **No preference** or weighted zero out of
+  the calculation. If no active factors remain, show **Not applicable**
+  and skip the practical fit minimum.
 - Let the user set both a preferred target and a zero-score point for the same
   numeric criterion. Give 1.0 at the preferred target or better and reduce
   the rating linearly to 0.0 at the zero-score point. Less favorable values
@@ -438,8 +448,10 @@ Status: approved for writing on 18 November 2026.
 
 - Score skills, interests, and practical fit separately and explain each score.
   Evaluate the whole posting before applying the qualification and review rules.
-  A posting qualifies automatically when all applicable scores meet their
-  minimums and no review rule applies.
+  A posting qualifies automatically when at least one category has a usable
+  score, all applicable scores meet their minimums, and no review rule applies.
+  If the posting has enough text to assess but no category has a usable score,
+  put it in **Needs review**.
 - A mismatch on any single preference, including one marked 1.0 or -1.0,
   affects its category score without independently blocking a match. Call out
   mismatches with strong preferences in the score explanation.
