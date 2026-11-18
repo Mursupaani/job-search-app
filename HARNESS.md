@@ -497,3 +497,25 @@ approved on 18 November 2026.
   version, including edits made since the last preview.
 - Provide **Copy letter** for application forms. Copy plain text with readable
   paragraph breaks and list markers.
+
+## 6. Application tracking
+
+Status: application records and manual reply logging approved on
+18 November 2026.
+
+### Application record
+
+- When the user selects **Mark as applied** after submitting an application,
+  record the submission date and time, the company name, the position title,
+  and a short summary of the posting. Keep the summary with the application
+  so it remains available if the original link stops working.
+- Let the user link the exact versions of the CV and cover letter they used.
+  Preserve those versions if the user edits a draft later. The user can mark
+  a role **Applied** without linking either document.
+
+### Replies
+
+- Provide a **Log reply** action. Let the user record when the reply arrived
+  and paste the message or summarize it in their own words.
+- Show logged replies in a timeline so the user can keep a record of multiple
+  updates, such as an interview invitation followed by a hiring decision.
