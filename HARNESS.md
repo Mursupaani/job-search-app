@@ -307,9 +307,14 @@ retention, and profile page approved on 18 November 2026.
 - Use only facts from the approved career profile. Describe skills in the
   application language selected under section 5. Use the posting's terminology
   where it accurately reflects the user's skills and experience.
-- Show a readable diff against the starting CV content, with a brief explanation
-  for each change. Ask the user to approve the draft or request changes. Show the
-  revised draft and diff for review after any requested changes.
+- Let the user edit the CV draft in the app.
+- Compare the first tailored draft with the saved CV version used to start it.
+  If the user selects **Use as starting point**, compare with that selected
+  CV version. If no starting CV exists, save a base version from the approved
+  profile before tailoring it.
+- Show a readable diff and briefly explain the proposed changes. Let the user
+  approve the draft or request changes. For revisions, compare the new draft
+  with the version the user last reviewed.
 - During review, ask separately whether to use the draft as the template for
   future CVs. If the user confirms, replace the current template with the draft's
   layout and formatting. Keep job-specific wording with the application.
