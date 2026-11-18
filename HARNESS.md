@@ -346,14 +346,14 @@ Status: approved for writing on 18 November 2026.
 - Use the initial interview to suggest personalized weights and practical
   preference values as well as score minimums. Let the user adjust the
   suggestions before confirming them.
-- When a posting introduces a relevant factor the user has not covered,
-  offer a short follow-up interview. Recognize equivalent wording so the
-  app can reuse an existing answer. Save confirmed answers for future
-  assessments.
-- For a new preference, offer **No preference** and **I'm not sure yet**.
+- Offer a short follow-up interview when a posting introduces a relevant
+  new factor or the assessment needs an answer about the user's experience
+  or preferences. Recognize equivalent wording so the app can reuse an
+  existing answer. Save confirmed experience in the career profile and
+  confirmed preferences in settings for future assessments.
+- For preference questions, offer **No preference** and **I'm not sure yet**.
   Treat unanswered or undecided factors as **Unknown** and flag them for
-  review when they could change the outcome. For a new skill, ask about the
-  user's experience and add it to the profile only after they confirm it.
+  review when they could change the outcome.
 
 ### Skills scoring
 
@@ -459,6 +459,10 @@ Status: approved for writing on 18 November 2026.
 
 ### Qualification and review
 
+- Use AI to identify requirements and suggest individual ratings. Show the
+  relevant evidence from the posting and the approved profile fact or
+  preference behind each rating when available. Calculate the final scores
+  in application code using those ratings and the saved scoring settings.
 - Score skills, interests, and practical fit separately and explain each score.
   Evaluate the whole posting before applying the qualification and review rules.
   A posting qualifies automatically when at least one category has a usable
@@ -488,9 +492,10 @@ Status: approved for writing on 18 November 2026.
 - Give each **Needs review** posting a short summary explaining why review is
   needed. Identify what needs checking or show the score that fell short, its
   minimum, and the reason for the shortfall.
-- Let the user add information they learn from the employer to the posting,
-  then re-score it automatically. Let the user decide whether to generate a CV
-  draft for a posting under review. That choice applies only to that posting.
+- Treat missing details about the job as **Unknown** until the user can
+  confirm them. Save confirmed job details on the posting and re-score it
+  automatically. Let the user decide whether to generate a CV draft for a
+  posting under review. That choice applies only to that posting.
 
 ### Saved postings
 
