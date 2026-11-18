@@ -8,7 +8,7 @@ Status: approved for writing on 17 November 2026. Open decisions are listed belo
 
 ### Mailbox and enabled sources
 
-- Use `mursupaani.dev@gmail.com` as the project owner's dedicated Gmail account.
+- The project owner will provide a dedicated Gmail address during email setup.
 - Target job alerts from LinkedIn, Duunitori, and Jobly when Gmail intake is
   added after the pasted-posting milestone.
 - The user arranges delivery or forwarding of those alerts to this account.
