@@ -155,13 +155,16 @@ templates must not be guessed during implementation.
 - Persist progress so a failed or interrupted run cannot silently skip alerts;
   use the same duplicate prevention for scheduled, manual, and catch-up checks.
 - Prevent repeated checks and retries from importing the same email twice.
+- Process newly received or unprocessed eligible alerts during checks. Do not
+  poll saved postings for changes.
 - Consolidate repeated appearances of the same position, including appearances
   across supported sources, into one job record. Preserve source references.
 
 ### Full posting retrieval and incomplete alerts
 
 - When an eligible alert contains only a preview, automatically try to retrieve
-  the full job description from its posting link.
+  the full job description from its posting link, unless the alert is already
+  identified as a role marked **Applied**.
 - If retrieval fails, requires login, or still yields only partial content,
   clearly mark the posting as incomplete and ask the user to paste the full text.
 - Do not request or use the user's job-site login to complete retrieval.
@@ -174,8 +177,12 @@ templates must not be guessed during implementation.
 
 ### Changed postings and repeat notifications
 
-- When updated content for an existing posting is detected during import or
-  retrieval, update the existing job record and automatically re-score it.
+- If a new alert is identified as a role marked **Applied**, skip fetching the
+  posting and skip AI scoring and drafting. Preserve the application record,
+  including its status and score, and exclude the alert from both digests.
+- When updated content for an existing posting that is not marked **Applied**
+  is detected during import or retrieval, update the existing job record and
+  automatically re-score it.
 - Queue another notification if the posting newly becomes a match or needs
   review, or important details of a previously matched role change, such as
   salary, location, or application deadline. Use the digest timing in section 4.
