@@ -291,12 +291,26 @@ Status: initial rules approved. Scoring details remain open.
 - By default, give essential employer requirements a weight of 2.0 and bonus
   skills a weight of 1.0. Multiply each weight by 1.0 for a full match, 0.5 for
   a partial match supported by the approved profile, or 0.0 for a clear gap.
-- If an unknown skill requirement could change whether the posting qualifies,
-  explain what is unclear and put the posting in **Needs review**.
+- Count each distinct skill requirement once. Divide the total points earned
+  by the total possible points for a skills score from 0.0 to 1.0. If the
+  posting lists no assessable skills, show the skills score as **Unknown**.
+- If a listed skill has an unknown match, show a score range. Use zero points
+  for that skill at the lower end and full points at the upper end. If the
+  uncertainty could change whether the posting qualifies, explain what is
+  unclear and put the posting in **Needs review**.
 - Explain which requirements the user fully meets, partly meets, or has no
   confirmed experience for. Gaps in employer requirements affect the skills
   score and do not independently disqualify a posting. The user's own
   must-haves still apply separately.
+
+### Interests weights
+
+- During the setup interview, ask how much day-to-day work, role, and industry
+  matter to the user. Suggest a decimal weight for each and briefly explain the
+  suggestions. Let the user adjust the weights before confirming them.
+- Let the user edit the weights in **Matching settings** or retake the interests
+  interview for fresh suggestions. Keep the current weights in effect until the
+  user confirms a change.
 
 ### Matching settings
 
@@ -346,6 +360,5 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Open decisions for this section
 
-- How weighted skills points translate to the final skills score, how interests
-  and practical fit are scored, and how interview answers translate into
-  suggested minimums.
+- How interests and practical fit scores are calculated, and how interview
+  answers translate into suggested minimums and interests weights.
