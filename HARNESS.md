@@ -320,6 +320,20 @@ Status: initial rules approved. Scoring details remain open.
   confirmed experience for. Gaps in employer requirements affect the skills
   score and do not independently disqualify a posting.
 
+### Preference weights
+
+- For each interests or practical fit preference, multiply its signed value
+  from section 3 by an adjustable, nonnegative decimal multiplier. The
+  multiplier starts at 1.0, so the starting signed weights are 1.0, 0.5,
+  -0.5, and -1.0 for the four active preference levels.
+- Use the sign of the preference to determine what earns a higher fit rating.
+  For a negative preference, avoiding the criterion earns a higher rating.
+  Use the absolute value of the signed weight in the weighted average, both
+  when weighting the fit rating and when summing the weights. Leave
+  **No preference** out of scoring.
+- Let the user edit the multiplier in **Matching settings** to change how
+  much the criterion counts without changing whether they want or avoid it.
+
 ### Interests scoring
 
 - During the setup interview, ask how much day-to-day work, role, and industry
@@ -338,7 +352,7 @@ Status: initial rules approved. Scoring details remain open.
 ### Practical fit scoring
 
 - Rate practical preferences from 0.0 to 1.0. Use the setup interview to
-  identify the factors that matter to the user and suggest adjustable weights.
+  identify the factors that matter to the user and suggest preference levels.
   Calculate practical fit as the weighted average of those ratings.
 - Let the user set both a preferred target and a zero-score point for the same
   numeric criterion. Give 1.0 at the preferred target or better and reduce
@@ -420,5 +434,4 @@ Status: initial rules approved. Scoring details remain open.
 
 - How individual interests ratings are assigned and how interview answers
   translate into suggested settings.
-- How much more a strong preference counts than a mild preference.
 - How incomplete postings interact with review and digests.
