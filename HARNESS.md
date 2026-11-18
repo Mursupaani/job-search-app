@@ -244,8 +244,14 @@ retention approved on 18 November 2026.
   these tasks appear across developer roles without assuming industry knowledge.
 - Ask about onboarding, mentorship, code reviews, and comfort with being
   the only developer on a team.
-- Let the user mark an answer as **must have**, **prefer**, or **no preference**.
-  If a posting omits a must-have detail, show it as **unknown** and flag it for review.
+- Use the same labeled preference scale in the interview and settings:
+  - `1.0` — **Strongly prefer to have**
+  - `0.5` — **Nice to have**
+  - `0.0` — **No preference**
+  - `-0.5` — **Prefer to avoid**
+  - `-1.0` — **Strongly prefer to avoid**
+- Keep these preference values separate from the posting's fit ratings, which
+  range from 0.0 to 1.0. Leave criteria marked **No preference** out of scoring.
 - Offer **I’m not sure yet** separately from **no preference**. Provide an
   optional follow-up with examples and leave the preference open if the user
   remains unsure.
@@ -312,8 +318,7 @@ Status: initial rules approved. Scoring details remain open.
   unclear and put the posting in **Needs review**.
 - Explain which requirements the user fully meets, partly meets, or has no
   confirmed experience for. Gaps in employer requirements affect the skills
-  score and do not independently disqualify a posting. The user's own
-  must-haves still apply separately.
+  score and do not independently disqualify a posting.
 
 ### Interests scoring
 
@@ -323,28 +328,29 @@ Status: initial rules approved. Scoring details remain open.
 - Rate day-to-day work, role, and industry from 0.0 to 1.0 and explain each
   rating using details from the posting. Calculate the interests score as the
   sum of the weighted ratings divided by the sum of the included weights.
-- Leave dimensions marked **No preference** out of the calculation. If a
-  dimension matters to the user but the posting leaves it unclear, show a
-  score range and flag it for review if the uncertainty could change whether
-  the posting qualifies.
+- Leave dimensions marked **No preference** out of the calculation. If every
+  interests dimension is marked **No preference**, show the interests score
+  as **Not applicable** and skip its minimum for qualification. If a dimension
+  matters to the user but the posting leaves it unclear, show a score range
+  and flag it for review if the uncertainty could change whether the posting
+  qualifies.
 
 ### Practical fit scoring
 
 - Rate practical preferences from 0.0 to 1.0. Use the setup interview to
   identify the factors that matter to the user and suggest adjustable weights.
   Calculate practical fit as the weighted average of those ratings.
-- Let the user set both a preferred target and a must-have limit for the same
+- Let the user set both a preferred target and a zero-score point for the same
   numeric criterion. Give 1.0 at the preferred target or better and reduce
-  the rating linearly to 0.0 at the limit. The limit itself meets the
-  must-have. Values beyond it fail that check.
+  the rating linearly to 0.0 at the zero-score point. Less favorable values
+  also earn 0.0 for that criterion.
 - For categories such as work arrangement, use editable ratings suggested by
   the interview. For a user who prefers on-site work, a hybrid role with
   confirmed daily office access earns 1.0 for work arrangement.
 - If a hybrid posting leaves daily office access unclear and the user prefers
   on-site work, offer two choices in **Matching settings**. **Pass** gives
   work arrangement 1.0 and explains the assumption. **Needs review** flags
-  the posting and asks the user to confirm office access. An on-site
-  must-have requires confirmation in either mode.
+  the posting and asks the user to confirm office access.
 - Show a score range for unresolved practical criteria and ask for review
   when the uncertainty could change whether the posting qualifies.
 
@@ -366,9 +372,13 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Qualification and review
 
-- Score skills, interests, and practical fit separately. Explain each score.
-  A posting qualifies automatically when all three scores meet their minimums
-  and all must-haves are confirmed.
+- Score skills, interests, and practical fit separately and explain each score.
+  Evaluate the whole posting before applying the qualification and review rules.
+  A posting qualifies automatically when all applicable scores meet their
+  minimums and no review rule applies.
+- A mismatch on any single preference, including one marked 1.0 or -1.0,
+  affects its category score without independently blocking a match. Call out
+  mismatches with strong preferences in the score explanation.
 - Mark an individual criterion **Unknown** when missing, vague, or conflicting
   information prevents a clear comparison with the approved career profile or
   preferences. Mark a clear mismatch **Doesn't meet**. Keep postings with only
@@ -376,16 +386,12 @@ Status: initial rules approved. Scoring details remain open.
 - Put an otherwise promising posting in **Needs review** if an unknown could
   change whether it qualifies. Show other unknowns in the score explanation.
 - Also put a posting in **Needs review** when exactly one score falls below its
-  minimum and the other two pass. Apply this rule equally to skills, interests,
-  and practical fit.
+  minimum and every other applicable score passes. Apply this rule equally to
+  skills, interests, and practical fit.
 - Also put a posting in **Needs review** when its interests score meets the
   minimum but its skills score falls short, even if practical fit also falls
   short. Explain what makes the role interesting and where the user's
   experience falls short.
-- A confirmed must-have mismatch prevents automatic qualification. If the
-  posting otherwise qualifies or meets a review rule, put it in **Needs
-  review** and include it in the review digest when eligible for notification.
-  Identify the failed must-have in the review summary.
 - Give each **Needs review** posting a short summary explaining why review is
   needed. Identify what needs checking or show the score that fell short, its
   minimum, and the reason for the shortfall.
@@ -414,5 +420,5 @@ Status: initial rules approved. Scoring details remain open.
 
 - How individual interests ratings are assigned and how interview answers
   translate into suggested settings.
-- Whether the user can request a CV draft for a posting that fails a confirmed
-  must-have, and how incomplete postings interact with review and digests.
+- How much more a strong preference counts than a mild preference.
+- How incomplete postings interact with review and digests.
