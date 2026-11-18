@@ -234,8 +234,9 @@ processed. Later email delivery is covered in [Email digests](docs/deferred-inte
 - Retain job descriptions, scores, CV recommendations, and cover-letter drafts
   until the user deletes them.
 - Retain technical processing logs for 30 days after each log entry is created,
-  then automatically remove expired entries. Logs must not contain email bodies
-  or credentials.
+  then automatically remove expired entries. Log operational metadata such as task type, outcome, and token count.
+  Keep raw prompts, replies, documents, email bodies, and credentials out
+  of logs, including when requests fail.
 
 ## 5. Cover letters
 
@@ -305,6 +306,14 @@ template import, writing styles, and manual reply logging approved on
 - Let the user link the exact versions of the CV and cover letter they used.
   Preserve those versions if the user edits a draft later. The user can mark
   a role **Applied** without linking either document.
+- Save editable content and formatting, generated Typst, and the version's
+  contact details, links, and assets. Reopen the saved editor content. Render
+  submitted versions with their saved contact details and layout, subject to
+  the explicit photo replacement rule below.
+- Preserve submitted versions when deleting a working draft. For explicit
+  deletion of a submitted version, show which application uses it and ask
+  for confirmation. Keep the application record and show that its document
+  was deleted.
 - If the user explicitly replaces the photo in a submitted CV under section 3,
   keep its wording and layout. Show **Photo updated after submission** only in
   the app alongside the CV in the application record.
@@ -379,6 +388,7 @@ template import, writing styles, and manual reply logging approved on
 - Store uploads privately and check ownership as described in section 7.
   Process uploads and render previews in isolated jobs without network
   access. Build previews from app-controlled Typst templates.
+  Give each render its own Typst project root with only that version's inputs.
 - Explain when a file is rejected or cannot be processed. Offer pasted
   text and a built-in layout as a fallback for documents.
 
@@ -414,6 +424,9 @@ approved on 18 November 2026.
 - Check ownership on the server for every read or change, including direct
   links to previews and downloads. Run background jobs under the account
   that owns the work.
+- Verify that an attached version belongs to the account and posting and
+  matches the selected document type. Test that two accounts can each attach,
+  download, and render their own CV and that cross-account attempts are denied.
 - Let the administrator view per-account AI usage and estimated costs as
   described in section 8. Keep profiles and documents private to their
   owners in the app.
@@ -448,6 +461,7 @@ approved on 18 November 2026.
 
 ### Sessions
 
+- Limit repeated failed sign-in attempts before exposing sign-in beyond the local prototype.
 - Offer **Remember me** at sign-in, unchecked by default. If selected, set a
   persistent cookie with a fixed 30-day expiry enforced by the server. Otherwise
   use a non-persistent cookie and a shorter server-enforced session expiry.
@@ -478,6 +492,8 @@ on 18 November 2026.
 
 ### Data sent to OpenAI
 
+- Treat pasted postings, CV text, writing samples, and uploads as source
+  material. Validate proposed facts, ratings, and evidence before use.
 - Send only the information needed for the specific AI task. For assessment
   and drafting, use relevant approved career facts, preferences, and posting
   text. Apply the same restriction to writing samples and consistency checks.
@@ -492,6 +508,12 @@ on 18 November 2026.
   Keep profile photos and account details out of all AI requests.
 - If the app cannot prepare an excerpt without identifying details, ask the
   user for a clean excerpt before proceeding with the AI task.
+- Offer **Preview AI requests before sending**. When enabled, pause each
+  request, including background and follow-up calls. Show the exact content
+  after redaction and offer **Send** and **Cancel**. Apply redaction either way.
+- Send Responses API requests with `store: false`. Explain that separate
+  abuse-monitoring logs can generally retain content for up to 30 days.
+  See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data).
 - Insert the user's selected name, contact details, links, and optional CV
   photo locally when rendering the application documents.
 
@@ -513,6 +535,9 @@ on 18 November 2026.
   tokens used, tokens remaining, estimated spending, and when the limit
   resets. Show the administrator a monthly usage and estimated cost
   breakdown by account so users can settle their share privately.
+- Reset personal limits and the shared cap at midnight on the first day of
+  each month in `Europe/Helsinki`. Show the reset time in settings and
+  attribute each request to its start month, even if usage arrives later.
 - Warn the user when usage reaches 90% of their monthly token limit. Inform
   them again when the limit prevents a request from starting.
 - Offer an optional monthly spending cap, off by default. The user chooses
@@ -520,8 +545,10 @@ on 18 November 2026.
   from this app.
 - Let the administrator set an optional monthly spending cap for the whole
   app in USD or EUR. Apply it across all accounts, alongside each account's
-  own limits. When an account is deleted, keep its spending in the app-wide
-  total for the current month without retaining its per-account usage history.
+  own limits. When an account is deleted, carry its spending into the shared
+  monthly total without its account identifier. Cancel queued requests.
+  Keep reservations for already-sent requests against the shared cap,
+  reconcile them if usage arrives, and release unconfirmed ones at reset.
 - Before starting an AI request, estimate usage from its input and maximum
   allowed output. Check the account's remaining token allowance and all
   enabled spending caps, then reserve the estimated tokens and any known
@@ -539,6 +566,12 @@ on 18 November 2026.
 
 ### AI request retries
 
+- Record the attempt before sending and disable automatic SDK retries.
+  Apply the same retry policy to unfinished attempts after restart.
+- Before saving a result, check ownership, posting status, and whether its
+  evidence is current. Keep settings editable while jobs run. Apply the
+  latest weights and minimums to valid evidence and reassess requirements
+  when their evidence changes. Preserve scores for **Applied** postings.
 - Retry automatically only when the failure is retryable and the app can
   confirm the earlier attempt was never processed. Release the reservation
   for that attempt and check the limits again before retrying.
@@ -565,8 +598,10 @@ on 18 November 2026.
   administrator who controls it. Token limits still apply.
 - Check the [ECB Data API](https://data.ecb.europa.eu/help/api/data-examples)
   once per day for the latest USD/EUR reference rate. Use the latest
-  published rate on weekends and holidays. Convert estimated USD charges
-  with that rate when enforcing a euro spending cap.
+  published rate on weekends, holidays, and during temporary outages. Convert
+  estimated USD charges with that rate and show its publication date in
+  settings. Until the first rate is available, pause requests covered by a
+  euro cap and show **Waiting for an exchange rate**.
 
 ### Data encryption
 
@@ -586,8 +621,11 @@ approved on 18 November 2026.
 ### Prototype
 
 - Keep prototype data across app restarts. Defer Google Drive integration and
-  scheduled backups. A manual encrypted backup is the first backup option to
-  add when real CVs or application history need protection.
+  scheduled backups. Add manual encrypted backup and restore before relying
+  on real applications. Back up the database and saved files together and
+  keep the recovery key separately. Restore into a fresh installation and
+  verify that a posting, its application history, and the exact linked CV
+  are available and that the CV renders.
 
 The later [Google Drive backup and restore procedure](docs/deferred-integrations.md#google-drive-backups-and-restore) covers scheduled backups, retention, and recovery on a fresh server.
 
@@ -607,6 +645,7 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
   the built-in GitHub Actions bot to open pull requests. The user reviews with
   their existing account. Each issue describes the expected behavior, how to
   verify it, and what the user will learn about the stack.
+- Link every PR to the GitHub issue it addresses in the PR description.
 - Require two sign-offs on the latest revision before merging. For the prototype,
   Codex waits for CI to pass on the commit it intends to present, then posts
   `@codex review` to request an independent Codex review. GitHub Actions
@@ -668,6 +707,11 @@ walkthrough to verify that the app turns a live response into scores and
 drafts. Trace **Save posting** from the React form through the Node.js API
 to the PostgreSQL row, then follow the worker's result back to the browser.
 Walk through the CI checks on the PR that introduces the feature.
+Enable AI request preview during the fictional walkthrough to verify
+redaction and check that failure logs omit raw content. Test a restart with
+an unconfirmed request and marking a posting **Applied** during assessment.
+Verify that a submitted CV renders with its saved email and layout after
+changing the profile email and default template.
 
 ### First development issues
 

@@ -28,7 +28,7 @@ Resetting a password revokes all sessions for that account.
 | `companies` | A company saved by one account | Account, name, and optional generated summary, sources, and summary date. Several postings can link to one company. |
 | `job_postings` | A posting saved by an account | Owner, original pasted text and optional link, company link if known, posting details, summary, benefits, and relevant dates. |
 | `posting_assessments` | A posting's current assessment | Posting, scores, outcome, review explanation, and time assessed. Allow one assessment row per posting. |
-| `assessment_criteria` | One criterion evaluated in an assessment | Assessment, requirement or preference, essential or bonus classification when applicable, match rating, and evidence used in the assessment. |
+| `assessment_criteria` | One criterion evaluated in an assessment | Assessment, requirement or preference, essential or bonus classification when applicable, match rating, supporting evidence, and any extracted numeric value and unit. |
 | `preferences` | One of the account's interests or practical preferences | Account, criterion, preference value, multiplier, and any applicable targets or cutoffs. |
 | `matching_settings` | An account's general scoring settings | One per account. Holds category minimums, skills weights and credit values, interest dimension weights, and other shared scoring settings. |
 
@@ -43,7 +43,7 @@ when the posting is marked **Applied**.
 | `applications` | A recorded submission | Posting, submission date and time, and the company name, role, and summary as recorded when applying. Optional links point to the exact CV and cover-letter versions used. |
 | `application_replies` | A reply from an employer | Application, date and time received, and message or summary entered by the user. |
 | `documents` | A CV or cover letter for a posting | Posting and document type. A document can have several saved versions. |
-| `document_versions` | A saved version of a CV or cover letter | Document, saved Typst source, save time, and optional photo reference for a CV. |
+| `document_versions` | A saved version of a CV or cover letter | Document, editable content and formatting, generated Typst, saved contact details and links, versioned assets, and save time. |
 | `document_templates` | An account's default layout for one document type | Account, document type, and reusable Typst layout. Keep one current default per type. |
 | `uploaded_files` | A private upload | Owner, file type, and reference to the encrypted file. A photo can be referenced by the profile and several saved CVs. |
 
@@ -58,12 +58,13 @@ label in the app.
 
 | Table | One row represents | Fields and relationships |
 | --- | --- | --- |
-| `background_jobs` | A queued task | Owner, task type, related posting when applicable, queue time, and status. |
+| `background_jobs` | A queued task | Owner, task type, related posting when applicable, input evidence used to check freshness, queue time, and status. |
 | `ai_requests` | An attempt to call OpenAI | Account, originating job when applicable, model, reservation and reported usage, estimated cost, and the exchange rate used when applicable. A job can make multiple requests. |
 | `model_prices` | A supported model's pricing | Input, cached input, and output rates, with the date and time they were last verified. Updates apply to future requests. |
 | `exchange_rates` | A published ECB rate | Publication date and US dollars per euro. Save the rate used for a converted estimate so the calculation can be reproduced. |
 | `account_ai_settings` | An account's AI settings | Model choices, monthly token limit, and optional monthly spending cap and currency. |
 | `app_ai_settings` | Shared AI settings | Optional app-wide monthly spending cap and currency. |
+| `deleted_account_spending` | Shared usage carried over for a billing month | Confirmed spending and outstanding reservations by month, without the account identifier. |
 
 Save a new posting and queue its assessment in one transaction. A worker can
 read the queued task from PostgreSQL after a restart. Before making an AI
