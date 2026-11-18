@@ -294,9 +294,12 @@ Status: initial rules approved. Scoring details remain open.
 ### Setup interview and scoring settings
 
 - During setup, interview the user about their skills, interests, and practical
-  requirements. Use their answers to suggest a starting minimum for each score.
+  requirements. Suggest starting minimums for skills, interests, and practical
+  fit directly from the interview answers, without requiring a separate round
+  of rating sample postings.
 - Show the three suggested minimums and briefly explain each suggestion. Let
-  the user adjust any minimum before confirming it.
+  the user adjust any minimum before confirming it and edit it later in
+  **Matching settings**.
 - Offer a more detailed interview for any category the user is unsure about.
   Use concrete examples and present a revised suggestion for that category for
   the user to review and adjust.
@@ -444,5 +447,5 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Open decisions for this section
 
-- How interview answers translate into suggested settings.
+- How the app maps interview answers to specific suggested values.
 - How incomplete postings interact with review and digests.
