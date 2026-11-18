@@ -44,7 +44,8 @@ The user's main personal mailbox is not connected to the app.
 
 - Compare each posting against the user's skills, interests, and practical
   requirements, showing separate scores and explanations.
-- Notify the user when the configured matching thresholds are met.
+- Show **Matches** and **Needs review** on the website as pasted postings
+  are processed. Defer email digests beyond the prototype's core workflow.
 - Recommend CV changes and draft a cover letter for qualifying positions.
 - Draft cover letters in Finnish or English according to the posting's language.
 - Present CV recommendations and cover letters for the user's review.
@@ -82,10 +83,11 @@ Section 7 covers account provisioning, password recovery, and session handling.
 - Configure credentials, API keys, and environment-specific settings outside
   application source code.
 - Avoid required dependencies on proprietary services of a particular host.
-- Provide encrypted backups and a restore procedure as described in section 9.
-- Once deployed to an always-on host, check for supported job alerts daily at
-  10:00 Helsinki time, independently of the user's Mac and without an open browser.
-  Also provide a user-triggered Check now action.
+- Preserve prototype data across app restarts. Defer backup automation as
+  described in section 9.
+- When Gmail intake is enabled on an always-on host, check for supported
+  job alerts daily at 10:00 Helsinki time, independently of the user's Mac
+  and browser. Also provide a user-triggered Check now action.
 
 Low cost and control over stored data are priorities; minimal maintenance is
 desirable. The prospective server may also host the user's website and other
@@ -122,10 +124,11 @@ Status: approved for writing on 17 November 2026. Open decisions are listed belo
 
 ### Access boundary
 
-- Use the Gmail API's `gmail.readonly` scope to import alerts and its
-  `gmail.send` scope to send notification digests from the same dedicated
-  account. Send digests only to the configured recipient. Do not request
-  permissions to delete, mark messages as read, or otherwise modify inbox mail.
+- Request the Gmail API's `gmail.send` scope when enabling email digests
+  and its `gmail.readonly` scope when enabling alert intake. Use the same
+  dedicated account for both features. Send digests only to the configured
+  recipient. Do not request permissions to delete, mark messages as read,
+  or otherwise modify inbox mail.
 - Explain during connection that Gmail's read permission applies to the connected
   mailbox; an application filter is not a provider-enforced per-sender permission.
 - Apply source and date filters before retrieving message bodies. Use only the
@@ -462,11 +465,16 @@ Status: approved for writing on 18 November 2026.
 
 ### Notification digests
 
+- In the prototype, show matches and postings that need review in the app as
+  they are processed. Users can view both sets of results without email.
+- When email digests are added, send copies of the corresponding in-app
+  results. Digest delivery can be enabled separately from Gmail intake.
 - Queue postings that newly become matches or need review, including after a
-  settings change or manual correction. Deliver queued entries after the next
-  scheduled check. If a posting has a known deadline that is still open and
-  less than 48 hours away, send its digest early. Postings with no known
-  deadline follow the regular schedule.
+  settings change or manual correction. When scheduled delivery is enabled,
+  email queued entries after the next scheduled check. If a posting has a
+  known deadline that is still open and less than 48 hours away, send its
+  email digest early. Postings with no known deadline follow the regular
+  schedule.
 - Send separate digests for matches and **Needs review** by email through the
   dedicated Gmail account and show both types in the app. Both can arrive at
   the same time. Skip empty digests.
@@ -603,9 +611,9 @@ and session handling approved on 18 November 2026.
 ### Email onboarding
 
 - During registration, collect the user's sign-in email as part of creating
-  the app account. Then let the user connect a dedicated Gmail account through
-  Google for importing job alerts and sending notification digests with the
-  permissions in section 2.
+  the app account. When the relevant Google integration is available, let the
+  user connect a dedicated Gmail account through Google with the permissions
+  in section 2. Request inbox access when Gmail intake is enabled.
 - Let the user choose the digest recipient address. Default to the sign-in
   email and let the user specify a different address. A recipient address
   does not grant mailbox access.
@@ -714,10 +722,16 @@ model settings, and monthly usage controls approved on 18 November 2026.
 
 ## 9. Backups and restore
 
-Status: daily Google Drive backups and server restore approved on
-18 November 2026.
+Status: prototype storage and later Google Drive backups and server restore
+approved on 18 November 2026.
 
-### Setup and retention
+### Prototype
+
+- Keep prototype data across app restarts. Defer Google Drive integration and
+  scheduled backups. A manual encrypted backup is the first backup option to
+  add when real CVs or application history need protection.
+
+### Automated backups and retention
 
 - Let the administrator connect a Google Drive account for backups. Request
   `drive.file` access to manage backup files created by the app. Create
