@@ -205,5 +205,5 @@ Status: approved for writing on 18 November 2026.
   minimum, and the reason for the shortfall.
 - Treat missing details about the job as **Unknown** until the user can
   confirm them. Save confirmed job details on the posting and re-score it
-  automatically. Let the user decide whether to generate a CV draft for a
-  posting under review. That choice applies only to that posting.
+  automatically. For **Match** and **Needs review** postings, follow the
+  [explicit drafting choices](../HARNESS.md#drafting-and-review).
