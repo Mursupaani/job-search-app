@@ -574,7 +574,16 @@ and session handling approved on 18 November 2026.
 
 ### Sessions
 
-- Offer **Remember me** at sign-in to keep the user signed in across browser
-  restarts. Without it, use a session intended to end when the browser closes.
-- Invalidate all existing sessions for the account after a password reset,
-  whether it was done using the email link or the server CLI command.
+- Offer **Remember me** at sign-in, unchecked by default. If selected, set a
+  persistent cookie with a fixed 30-day expiry enforced by the server. Otherwise
+  use a non-persistent cookie and a shorter server-enforced session expiry.
+  Browser closure alone does not reliably end a session.
+- Put only a random sign-in token in an authentication cookie. Store a hash of
+  the token on the server. Serve the app over HTTPS and set `Secure`,
+  `HttpOnly`, and `SameSite=Lax` on authentication cookies. Allow users to
+  follow links from email digests while signed in.
+- Protect actions that change data against cross-site request forgery (CSRF).
+  Opening a digest link displays the posting without changing its state.
+- On sign-out, revoke the current session and remembered sign-in on the server.
+  After a password reset via email or the server CLI, revoke all sessions and
+  remembered sign-ins for that account.
