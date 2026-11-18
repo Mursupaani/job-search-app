@@ -247,6 +247,17 @@ Status: initial workflow approved on 17 November 2026; further decisions remain 
 - Keep existing scores for postings marked **Applied** and preserve existing
   drafts regardless of application status.
 
+### Application CVs and unclear profile facts
+
+- Keep the edited CV with its job posting and cover letter as part of the
+  application record.
+- Provide a Delete button for the saved CV and require confirmation before
+  removing it. Retain saved CVs until the user confirms deletion.
+- Flag unclear extracted CV details for the user to correct, confirm, or skip.
+  Use only confirmed profile facts for matching and drafting.
+
 ### Open decisions for this section
 
-- Handling of ambiguous CV extraction and retention of uploaded source documents.
+- Retention of the original uploaded source file, separate from the edited CV
+  saved with an application.
+- Choice of editable CV format and export workflow.
