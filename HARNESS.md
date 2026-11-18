@@ -30,6 +30,7 @@ posting through assessment, review of the CV and cover letter, and manually
 marking the application **Applied** after submission.
 
 - [Matching](docs/matching.md) covers the interview, scoring settings, and qualification rules.
+- [Database schema](docs/database-schema.md) describes the prototype's tables and their relationships.
 - [Deferred integrations](docs/deferred-integrations.md) covers Gmail intake, posting retrieval, email digests, and scheduled Google Drive backups.
 - Open planning items include [hosting](#deployment-and-background-operation), [email source validation](docs/deferred-integrations.md#open-decisions-for-this-section), and [build and rollout](#10-build-and-rollout).
 
@@ -146,10 +147,11 @@ retention, and profile page approved on 18 November 2026.
   and their country, city, and street address.
 - Let the user set the contact email and phone number for CVs and cover letters.
   Keep the application contact email separate from the account's sign-in email.
-- Support custom links with a label and URL. Examples include GitHub, LinkedIn,
-  a portfolio or homepage, a live project demo, an app store listing, a
-  technical blog, an open source contribution, or a certificate verification
-  page.
+- Provide **Add link** on the profile page. Save each custom label and URL to
+  the user's profile and let the user edit or remove it later. Examples include
+  GitHub, LinkedIn, a portfolio or homepage, a live project demo, an app store
+  listing, a technical blog, an open source contribution, or a certificate
+  verification page.
 - Let the user choose which contact details and links to include separately
   on the CV and cover letter. Default to city and country for location.
   Include the street address only if selected.
@@ -298,7 +300,8 @@ template import, writing styles, and manual reply logging approved on
   Preserve those versions if the user edits a draft later. The user can mark
   a role **Applied** without linking either document.
 - If the user explicitly replaces the photo in a submitted CV under section 3,
-  keep its wording and layout and label it **Photo updated after submission**.
+  keep its wording and layout. Show **Photo updated after submission** only in
+  the app alongside the CV in the application record.
 
 ### Companies
 
@@ -584,4 +587,30 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
 
 ## 10. Build and rollout
 
-Open for discussion. The first milestone and its acceptance criteria are pending approval.
+### Technology stack
+
+- Build the browser interface in React and TypeScript. Use a Node.js HTTP API
+  written in TypeScript and PostgreSQL for persistence.
+- Review the [database schema](docs/database-schema.md) together before writing
+  migrations. Use the job-posting workflow to trace the path from a browser
+  request through API validation and ownership checks to a database write.
+
+### GitHub issues, review, and delivery
+
+- Work on one active GitHub issue at a time. Codex creates the issues and pull
+  requests. Each issue describes the expected behavior, how to verify it, and
+  what the user will learn about the stack.
+- Require two sign-offs on the latest revision before merging. An independent
+  agent reviews the PR automatically, and the user approves it on GitHub.
+  Open development PRs under an identity distinct from the user's. Use a
+  required status check for the agent's verdict if its review cannot count as
+  a required GitHub approval. Verify both merge requirements in the private
+  repository when setting up the workflow.
+- Set up CI/CD. Run tests and build checks on PR revisions. Prepare a verified
+  build for deployment and connect deployment when the hosting target is ready.
+  Explain CI and CD during implementation by walking through the first pipeline
+  run and how to verify the deployed version.
+- Make learning full-stack development a project goal. Walk through the code
+  and show how to exercise each change locally when presenting its PR for review.
+
+The first build milestone and its acceptance criteria are pending approval.

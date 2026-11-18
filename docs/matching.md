@@ -60,6 +60,9 @@ Status: approved for writing on 18 November 2026.
 
 ## Skills scoring
 
+- Show **Technical skills** and **Professional skills** separately in the
+  profile and let users filter by category. Apply the same scoring rules to
+  both. The posting determines whether a requirement is essential or a bonus.
 - By default, give essential employer requirements a weight of 2.0 and bonus
   skills a weight of 1.0. Multiply each weight by 1.0 for a full match, 0.5 for
   a partial match supported by the approved profile, or 0.0 for a clear gap.
@@ -158,6 +161,10 @@ Status: approved for writing on 18 November 2026.
   and saves the selected changes.
 - When the user updates approved career facts, preferences, or scoring settings,
   automatically re-score saved postings they have yet to apply to.
+- Save the rating and supporting evidence for each assessed criterion. When
+  only a weight or cutoff changes, use the saved ratings to recalculate scores
+  or qualification locally. Reassess a criterion when a new fact changes the
+  evidence used to rate it.
 - Keep existing scores for postings marked **Applied** and preserve existing
   drafts regardless of application status.
 
