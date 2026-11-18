@@ -234,7 +234,7 @@ retention, and profile page approved on 18 November 2026.
 
 ### CV import and verified profile
 
-- Allow the user to upload a CV in PDF or Word format, or paste its text.
+- Allow the user to upload a CV in PDF or `.docx` format, or paste its text.
 - Extract work experience, skills, education, and languages into an editable
   career profile.
 - Let the user review and correct the extracted facts before approving them.
@@ -651,6 +651,20 @@ template import, writing styles, and manual reply logging approved on
 - Show a rendered sample so the user can review the layout and how the
   writing reads. Use the same facts when previewing different styles.
   Ask for confirmation before replacing a default.
+
+### Upload and preview safety
+
+- Accept PDF and `.docx` documents and JPEG or PNG profile photos. Verify
+  the file's contents and structure on the server against the allowed type.
+  Treat file extensions and browser-provided MIME types as hints.
+- Set prototype upload limits of 10 MB per document and 5 MB per photo.
+  Limit decompressed document size and decoded image dimensions, and enforce
+  time and memory limits during processing.
+- Store uploads privately and check ownership as described in section 7.
+  Process uploads and render previews in isolated jobs without network
+  access. Build previews from app-controlled Typst templates.
+- Explain when a file is rejected or cannot be processed. Offer pasted
+  text and a built-in layout as a fallback for documents.
 
 ### Replies
 
