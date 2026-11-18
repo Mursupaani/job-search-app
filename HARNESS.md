@@ -115,8 +115,10 @@ Status: approved for writing on 17 November 2026. Open decisions are listed belo
 
 ### Access boundary
 
-- Use read-only Gmail API access for the dedicated account. Do not request
-  permissions to send, delete, mark messages as read, or otherwise modify mail.
+- Use the Gmail API's `gmail.readonly` scope to import alerts and its
+  `gmail.send` scope to send notification digests from the same dedicated
+  account. Send digests only to the configured recipient. Do not request
+  permissions to delete, mark messages as read, or otherwise modify inbox mail.
 - Explain during connection that Gmail's read permission applies to the connected
   mailbox; an application filter is not a provider-enforced per-sender permission.
 - Apply source and date filters before retrieving message bodies. Use only the
@@ -174,9 +176,9 @@ templates must not be guessed during implementation.
 
 - When updated content for an existing posting is detected during import or
   retrieval, update the existing job record and automatically re-score it.
-- Send another notification only if the posting newly meets the configured
-  matching thresholds, or important details of a previously matched role change,
-  such as salary, location, or application deadline.
+- Queue another notification if the posting newly becomes a match or needs
+  review, or important details of a previously matched role change, such as
+  salary, location, or application deadline. Use the digest timing in section 4.
 - Repeated alerts with unchanged posting content must not generate duplicate
   notifications.
 - Preserve existing CV recommendations and cover-letter drafts for user review;
@@ -323,11 +325,21 @@ Status: initial rules approved. Scoring details remain open.
 
 - Rate practical preferences from 0.0 to 1.0. Use the setup interview to
   identify the factors that matter to the user and suggest adjustable weights.
+  Calculate practical fit as the weighted average of those ratings.
 - Let the user set both a preferred target and a must-have limit for the same
-  criterion. Award partial credit when a posting falls short of the preferred
-  target but stays within the hard limit. Check must-haves separately.
-- Flag missing information and ask for review when it could change whether the
-  posting qualifies.
+  numeric criterion. Give 1.0 at the preferred target or better and reduce
+  the rating linearly to 0.0 at the limit. The limit itself meets the
+  must-have. Values beyond it fail that check.
+- For categories such as work arrangement, use editable ratings suggested by
+  the interview. For a user who prefers on-site work, a hybrid role with
+  confirmed daily office access earns 1.0 for work arrangement.
+- If a hybrid posting leaves daily office access unclear and the user prefers
+  on-site work, offer two choices in **Matching settings**. **Pass** gives
+  work arrangement 1.0 and explains the assumption. **Needs review** flags
+  the posting and asks the user to confirm office access. An on-site
+  must-have requires confirmation in either mode.
+- Show a score range for unresolved practical criteria and ask for review
+  when the uncertainty could change whether the posting qualifies.
 
 ### Matching settings
 
@@ -376,16 +388,24 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Notification digests
 
-- After a check, send up to two separate digests by email and show both types in
-  the app. Group all new matches in one digest and all new **Needs review**
-  postings in the other. Both can arrive at the same time. Skip empty digests.
+- Queue postings that newly become matches or need review, including after a
+  settings change or manual correction. Deliver queued entries after the next
+  scheduled check. If a posting has a known deadline that is still open and
+  less than 48 hours away, send its digest early. Postings with no known
+  deadline follow the regular schedule.
+- Send separate digests for matches and **Needs review** by email through the
+  dedicated Gmail account and show both types in the app. Both can arrive at
+  the same time. Skip empty digests.
+- Use the posting's latest status at delivery time. Include it in at most one
+  digest for the same status change, and do not repeat early entries in the
+  scheduled digest.
 - Link each entry to its posting in the app. Include the short review reason
   for each **Needs review** entry.
 - Apply the repeat notification rules for changed postings in section 2.
 
 ### Open decisions for this section
 
-- How individual interests ratings and practical fit scores are calculated,
-  and how interview answers translate into suggested settings.
+- How individual interests ratings are assigned and how interview answers
+  translate into suggested settings.
 - Whether the user can request a CV draft for a posting that fails a confirmed
   must-have, and how incomplete postings interact with review and digests.
