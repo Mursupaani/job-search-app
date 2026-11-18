@@ -276,7 +276,7 @@ retention approved on 18 November 2026.
 
 Status: initial rules approved. Scoring details remain open.
 
-### Setup interview and score minimums
+### Setup interview and scoring settings
 
 - During setup, interview the user about their skills, interests, and practical
   requirements. Use their answers to suggest a starting minimum for each score.
@@ -285,6 +285,9 @@ Status: initial rules approved. Scoring details remain open.
 - Offer a more detailed interview for any category the user is unsure about.
   Use concrete examples and present a revised suggestion for that category for
   the user to review and adjust.
+- Use the initial interview to suggest personalized weights and practical
+  preference values as well as score minimums. Let the user adjust the
+  suggestions before confirming them.
 
 ### Skills scoring
 
@@ -303,14 +306,28 @@ Status: initial rules approved. Scoring details remain open.
   score and do not independently disqualify a posting. The user's own
   must-haves still apply separately.
 
-### Interests weights
+### Interests scoring
 
 - During the setup interview, ask how much day-to-day work, role, and industry
   matter to the user. Suggest a decimal weight for each and briefly explain the
   suggestions. Let the user adjust the weights before confirming them.
-- Let the user edit the weights in **Matching settings** or retake the interests
-  interview for fresh suggestions. Keep the current weights in effect until the
-  user confirms a change.
+- Rate day-to-day work, role, and industry from 0.0 to 1.0 and explain each
+  rating using details from the posting. Calculate the interests score as the
+  sum of the weighted ratings divided by the sum of the included weights.
+- Leave dimensions marked **No preference** out of the calculation. If a
+  dimension matters to the user but the posting leaves it unclear, show a
+  score range and flag it for review if the uncertainty could change whether
+  the posting qualifies.
+
+### Practical fit scoring
+
+- Rate practical preferences from 0.0 to 1.0. Use the setup interview to
+  identify the factors that matter to the user and suggest adjustable weights.
+- Let the user set both a preferred target and a must-have limit for the same
+  criterion. Award partial credit when a posting falls short of the preferred
+  target but stays within the hard limit. Check must-haves separately.
+- Flag missing information and ask for review when it could change whether the
+  posting qualifies.
 
 ### Matching settings
 
@@ -319,6 +336,11 @@ Status: initial rules approved. Scoring details remain open.
   credit values, and the weights and cutoffs for interests and practical fit.
 - Use floating-point values for scoring parameters and display them as decimals.
   Provide a slider for the essential-to-bonus weight ratio, starting at 2.0.
+- Let the user retake the full interview or start an interview for skills,
+  interests, or practical fit. After either interview, show current and
+  suggested values side by side and let the user choose which fields and
+  weights to update. Keep current values in effect until the user confirms
+  and saves the selected changes.
 - When the user saves scoring changes, re-score saved postings they have yet
   to apply to. Preserve scores for postings marked **Applied** and keep existing
   drafts, as in section 3.
@@ -360,5 +382,5 @@ Status: initial rules approved. Scoring details remain open.
 
 ### Open decisions for this section
 
-- How interests and practical fit scores are calculated, and how interview
-  answers translate into suggested minimums and interests weights.
+- How individual interests ratings and practical fit scores are calculated,
+  and how interview answers translate into suggested settings.
