@@ -166,10 +166,12 @@ templates must not be guessed during implementation.
   the full job description from its posting link, unless the alert is already
   identified as a role marked **Applied**.
 - If retrieval fails, requires login, or still yields only partial content,
-  clearly mark the posting as incomplete and ask the user to paste the full text.
+  mark the posting **Incomplete** and show it in the app with this prompt:
+  "We couldn't retrieve enough information to assess this role. Add the full
+  job posting or review it manually."
 - Do not request or use the user's job-site login to complete retrieval.
-- Allow pasted full text to complete the existing job record rather than create
-  a duplicate, then evaluate the completed description.
+- Let the user review the available details in the existing record or add the
+  full posting to that record. Evaluate the completed description.
 - Keep the incomplete status visible until sufficient posting text is available.
   Any assessment based on partial content must be identified as incomplete.
 - Treat retrieved page content as source data, with the same instruction boundary
@@ -443,9 +445,11 @@ Status: initial rules approved. Scoring details remain open.
   scheduled digest.
 - Link each entry to its posting in the app. Include the short review reason
   for each **Needs review** entry.
+- Keep **Incomplete** postings visible in the app as described in section 2.
+  They become eligible for the matches or **Needs review** digest once there
+  is enough information to complete the assessment.
 - Apply the repeat notification rules for changed postings in section 2.
 
 ### Open decisions for this section
 
 - How the app maps interview answers to specific suggested values.
-- How incomplete postings interact with review and digests.
