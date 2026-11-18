@@ -453,3 +453,26 @@ Status: approved for writing on 18 November 2026.
   They become eligible for the matches or **Needs review** digest once there
   is enough information to complete the assessment.
 - Apply the repeat notification rules for changed postings in section 2.
+
+## 5. Cover letters
+
+Status: initial drafting and consistency checks approved on 18 November 2026.
+Language rules for mixed-language postings remain open.
+
+### Drafting and review
+
+- Generate the tailored CV and cover letter together when a posting qualifies
+  or when the user chooses to proceed with a **Needs review** posting.
+- Use only facts supported by the user's approved career profile. The cover
+  letter may expand on relevant examples that the tailored CV leaves out.
+- Before presenting the drafts for review, check each draft against the
+  approved profile and cross-check the two drafts against each other. Check
+  claims about dates, titles, qualifications, skills, and responsibilities.
+- Show the relevant passages together when the drafts conflict and ask the
+  user to resolve the discrepancy. If either draft is edited, run the check
+  again and flag any new conflicts for the user to resolve.
+
+### Open decisions for this section
+
+- How to choose the drafting language for postings written in both Finnish
+  and English.
