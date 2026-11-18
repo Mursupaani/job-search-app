@@ -390,9 +390,15 @@ Status: approved for writing on 18 November 2026.
 - During the setup interview, ask how much day-to-day work, role, and industry
   matter to the user. Suggest a decimal weight for each and briefly explain the
   suggestions. Let the user adjust the weights before confirming them.
-- Rate day-to-day work, role, and industry from 0.0 to 1.0 and explain each
-  rating using details from the posting. Calculate the interests score as the
-  sum of the weighted ratings divided by the sum of the included weights.
+- Assign each interest preference to one of three dimensions. **Day-to-day
+  work** covers activities like building features and reviewing code. **Role**
+  covers responsibilities, autonomy, and opportunities to grow, such as
+  mentorship. **Industry** covers the kinds of products, problems, or sectors
+  the user wants to work on.
+- Rate each preference from 0.0 to 1.0 and explain the rating using details
+  from the posting. Calculate each dimension's score as the weighted average
+  of its preference ratings. Calculate the overall interests score as the
+  weighted average of the dimension scores using the dimension weights.
 - Default to 1.0 for a clear fit, 0.5 for a partial fit, and 0.0 for a
   clear mismatch across all three dimensions. If there is too little
   information to assign a rating, mark it **Unknown**.
@@ -400,11 +406,11 @@ Status: approved for writing on 18 November 2026.
   Require each value to stay within 0.0 to 1.0. A clear fit must score at
   least as high as a partial fit, and a partial fit at least as high as a
   clear mismatch.
-- Leave dimensions marked **No preference** or weighted zero out of the
-  calculation. If no active criteria remain, show **Not applicable** and
-  skip the interests minimum. If an active dimension is unclear, show a
-  score range and flag it for review if the uncertainty could change whether
-  the posting qualifies.
+- Exclude preferences marked **No preference** or weighted zero. Exclude
+  dimensions with no active preferences or a weight of zero. If no active
+  dimension remains, show **Not applicable** and skip the interests minimum.
+  If an active preference is unclear, show a score range and flag it for
+  review if the uncertainty could change whether the posting qualifies.
 
 ### Practical fit scoring
 
@@ -414,6 +420,8 @@ Status: approved for writing on 18 November 2026.
 - Leave practical factors marked **No preference** or weighted zero out of
   the calculation. If no active factors remain, show **Not applicable**
   and skip the practical fit minimum.
+- Include a benefit in practical fit scoring when the user has an active
+  preference about it.
 - Let the user set both a preferred target and a zero-score point for the same
   numeric criterion. Give 1.0 at the preferred target or better and reduce
   the rating linearly to 0.0 at the zero-score point. Less favorable values
@@ -491,6 +499,8 @@ Status: approved for writing on 18 November 2026.
   Preserve date-only deadlines as dates.
 - Save location, work arrangement, salary range, and contract type when
   stated. Keep the assessment outcome, scores, and a short explanation.
+- List any benefits stated in the posting, including any stated conditions,
+  regardless of the assessment outcome or whether the benefits affect scoring.
 
 ### Notification digests
 
