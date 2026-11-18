@@ -271,3 +271,43 @@ retention approved on 18 November 2026.
   later template edits. Render PDFs on demand without retaining them.
 - Provide a Delete button for the saved CV and require confirmation before
   removing it. Retain saved CVs until the user confirms deletion.
+
+## 4. Job matching and notifications
+
+Status: initial rules approved. Scoring details remain open.
+
+### Qualification and review
+
+- Score skills, interests, and practical fit separately. Explain each score.
+  A posting qualifies automatically when all three scores meet their minimums
+  and all must-haves are confirmed.
+- Mark an individual criterion **Unknown** when missing, vague, or conflicting
+  information prevents a clear comparison with the approved career profile or
+  preferences. Mark a clear mismatch **Doesn't meet**. Keep postings with only
+  partial text **Incomplete** as described in section 2.
+- Put an otherwise promising posting in **Needs review** if an unknown could
+  change whether it qualifies. Show other unknowns in the score explanation.
+- Also put a posting in **Needs review** when exactly one score falls below its
+  minimum and the other two pass. Apply this rule equally to skills, interests,
+  and practical fit. A confirmed must-have mismatch prevents automatic
+  qualification.
+- Give each **Needs review** posting a short summary explaining why review is
+  needed. Identify what needs checking or show the score that fell short, its
+  minimum, and the reason for the shortfall.
+- Let the user add information they learn from the employer to the posting,
+  then re-score it automatically. Let the user decide whether to generate a CV
+  draft for a posting under review. That choice applies only to that posting.
+
+### Notification digests
+
+- After a check, send up to two separate digests by email and show both types in
+  the app. Group all new matches in one digest and all new **Needs review**
+  postings in the other. Both can arrive at the same time. Skip empty digests.
+- Link each entry to its posting in the app. Include the short review reason
+  for each **Needs review** entry.
+- Apply the repeat notification rules for changed postings in section 2.
+
+### Open decisions for this section
+
+- How each score is calculated and whether to offer starting minimums or ask
+  the user to choose them during setup.
