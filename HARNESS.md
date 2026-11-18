@@ -300,8 +300,9 @@ Status: approved for writing on 18 November 2026.
   fit directly from the interview answers, without requiring a separate round
   of rating sample postings.
 - Ask how close a fit a posting should be to qualify automatically for each
-  category. Map **Open to a stretch** to 0.5, **Solid match** to 0.7, and
-  **Close match** to 0.85. Apply the same mapping separately to each category.
+  category. Map **Open to a stretch** to 0.5, **Solid match** to 0.7,
+  **Close match** to 0.85, and **Exact match** to 1.0. Apply the same mapping
+  separately to each category.
 - Show the three suggested minimums and briefly explain each suggestion. Let
   the user adjust any minimum before confirming it and edit it later in
   **Matching settings**.
