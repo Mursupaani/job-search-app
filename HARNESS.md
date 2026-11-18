@@ -456,12 +456,29 @@ Status: approved for writing on 18 November 2026.
   minimum but its skills score falls short, even if practical fit also falls
   short. Explain what makes the role interesting and where the user's
   experience falls short.
+- Mark an assessed posting **Below minimums** when neither **Match** nor
+  **Needs review** applies. Keep it searchable in **All postings** with its
+  scores and explanations. Do not send a notification or generate drafts
+  automatically for this outcome.
 - Give each **Needs review** posting a short summary explaining why review is
   needed. Identify what needs checking or show the score that fell short, its
   minimum, and the reason for the shortfall.
 - Let the user add information they learn from the employer to the posting,
   then re-score it automatically. Let the user decide whether to generate a CV
   draft for a posting under review. That choice applies only to that posting.
+
+### Saved postings
+
+- For every assessed posting, save a short summary, the company name, the
+  position title, and the original link if provided. Apply this to **Match**,
+  **Needs review**, and **Below minimums**. Show unknown values when the
+  company name or position title is missing.
+- Keep the original pasted text, the date and time the posting was added,
+  and the date and time it was last assessed. Record the employer's
+  publication date and application deadline separately when provided.
+  Preserve date-only deadlines as dates.
+- Save location, work arrangement, salary range, and contract type when
+  stated. Keep the assessment outcome, scores, and a short explanation.
 
 ### Notification digests
 
@@ -535,8 +552,9 @@ approved on 18 November 2026.
 
 ## 6. Application tracking
 
-Status: application records, document storage and reuse, template import,
-writing styles, and manual reply logging approved on 18 November 2026.
+Status: application records, company pages, document storage and reuse,
+template import, writing styles, and manual reply logging approved on
+18 November 2026.
 
 ### Application record
 
@@ -547,6 +565,20 @@ writing styles, and manual reply logging approved on 18 November 2026.
 - Let the user link the exact versions of the CV and cover letter they used.
   Preserve those versions if the user edits a draft later. The user can mark
   a role **Applied** without linking either document.
+
+### Companies
+
+- Provide a **Companies** section for each user. On a company page, show all
+  their saved postings for that company and the applications they marked
+  **Applied**, including submission dates and reply history.
+- Suggest a company when the user adds a posting. Let the user correct a
+  posting's company link and merge duplicate company entries.
+- Provide **Generate company summary**. Generate and save a short description
+  of what the company does only when the user requests it. Record the sources
+  used and the date the summary was generated.
+- In the prototype, use company details from pasted postings and extra text
+  the user provides. If those sources do not support a summary, ask the user
+  for more information.
 
 ### Saved documents and templates
 
