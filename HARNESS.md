@@ -222,12 +222,24 @@ Status: initial workflow approved on 17 November 2026; further decisions remain 
 
 - Collect interests and practical preferences through guided questions.
 - Keep preferences separate from factual career information extracted from the CV.
-- The questionnaire's categories and answer formats will be agreed with the user.
+- Ask about target roles, day-to-day tasks, industries, skills the user enjoys
+  using or wants to develop, and work they want to avoid.
+- Ask about location and commute, remote or hybrid work, salary, working
+  languages, seniority, contract type, and travel.
+- Support a thorough exploration for a first software developer role. Use
+  plain language and concrete examples of tasks, such as building a page,
+  writing request-handling logic, or investigating a bug. Explain where
+  these tasks appear across developer roles without assuming industry knowledge.
+- Ask about onboarding, mentorship, code reviews, and comfort with being
+  the only developer on a team.
+- Let the user mark an answer as **must have**, **prefer**, or **no preference**.
+  If a posting omits a must-have detail, show it as **unknown** and flag it for review.
+- Offer **I’m not sure yet** separately from **no preference**. Provide an
+  optional follow-up with examples and leave the preference open if the user
+  remains unsure.
 
 ### Open decisions for this section
 
-- Which interest and practical-preference categories the guided questions cover.
-- How to distinguish mandatory requirements from preferences and their importance.
 - How later CV uploads, profile corrections, and preference changes affect saved
   matches and existing drafts.
 - Handling of ambiguous CV extraction and retention of uploaded source documents.
