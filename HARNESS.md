@@ -746,7 +746,8 @@ session handling, and account isolation approved on 18 November 2026.
 ## 8. AI usage, spending, and data protection
 
 Status: shared AI connection, per-account usage tracking, encryption,
-model settings, and monthly usage controls approved on 18 November 2026.
+AI data minimization, model settings, and monthly usage controls approved
+on 18 November 2026.
 
 ### AI connection
 
@@ -755,6 +756,21 @@ model settings, and monthly usage controls approved on 18 November 2026.
 - Store the key encrypted on the server. Keep it out of user-facing settings
   and logs. If the administrator has not configured the key, users can still
   add and read postings and track applications.
+
+### Data sent to OpenAI
+
+- Send only the information needed for the specific AI task. For assessment
+  and drafting, use relevant approved career facts, preferences, and posting
+  text. Apply the same restriction to writing samples and consistency checks.
+- Extract text from CVs and cover letters on the app server. Keep the
+  original files and the user's identifying details on the server. Remove
+  names, email addresses, phone numbers, street addresses, personal links,
+  and other identifying details from user text before sending it to OpenAI.
+  Keep profile photos and account details out of all AI requests.
+- If the app cannot prepare an excerpt without identifying details, ask the
+  user for a clean excerpt before proceeding with the AI task.
+- Insert the user's selected name, contact details, links, and optional CV
+  photo locally when rendering the application documents.
 
 ### Model selection
 
