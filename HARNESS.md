@@ -617,4 +617,54 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
 - Make learning full-stack development a project goal. Walk through the code
   and show how to exercise each change locally when presenting its PR for review.
 
-The first build milestone and its acceptance criteria are pending approval.
+### First build milestone
+
+Run the application workflow locally on the user's Mac, from approving a
+career profile through recording a submitted application. Use fictional data
+and built-in Typst layouts for the walkthrough.
+
+The milestone is complete when the user can do the following.
+
+1. **Sign in and approve a profile.** Start with an editable sample profile or
+   paste CV text. Review, edit, and confirm the career facts the app will use
+   for assessment and drafting.
+2. **Complete a short setup interview.** Answer questions about skills,
+   interests, and practical requirements. Review, adjust, and approve the
+   suggested scoring minimums and weights. Change an answer and verify that
+   the resulting settings affect the relevant score as expected.
+3. **Save and assess a pasted posting.** Save the text and an optional source
+   link. See evidence for the separate skills, interests, and practical fit
+   scores. Verify a **Match** and a **Needs review** result, including the short
+   explanation of why the latter needs review.
+4. **Generate, review, and export both drafts.** Generate the CV and cover
+   letter together using the built-in layouts. Review the CV diff and any
+   consistency findings. Edit both drafts, render previews, and download PDFs.
+5. **Record the submission and verify persistence.** Mark the posting
+   **Applied** and link the exact CV and cover-letter versions used. Save a
+   later edit and check that the application still opens the selected versions.
+   Restart the app, sign back in, and reopen the posting, assessment, drafts,
+   and application record.
+
+Use fixed AI responses in CI to verify the match, review, and interview cases
+repeatably. Use the real AI connection with fictional data during the local
+walkthrough to verify that the app turns a live response into scores and
+drafts. Trace **Save posting** from the React form through the Node.js API
+to the PostgreSQL row, then follow the worker's result back to the browser.
+Walk through the CI checks on the PR that introduces the feature.
+
+### First development issues
+
+1. **Verify the PR review workflow.** Use a small test PR to verify that the
+   GitHub Actions bot opens it, the user can approve it, and GitHub requires the
+   user approval, independent review check, and passing CI on the latest
+   revision before merge.
+2. **Save and reopen a pasted posting.** Build the first feature across the
+   browser, API, and database.
+
+### After the first milestone
+
+Add CV and cover-letter uploads in the next milestone. Use the CV to propose
+career facts for the user to verify. Let both document types provide a sample
+for layout or writing style, with the two choices made independently.
+Add targeted re-interviews and follow-up questions for unfamiliar job
+requirements after the setup interview works end to end.
