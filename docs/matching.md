@@ -54,6 +54,9 @@ Status: approved for writing on 18 November 2026.
   or preferences. Recognize equivalent wording so the app can reuse an
   existing answer. Save confirmed experience in the career profile and
   confirmed preferences in settings for future assessments.
+  When a posting names a skill and the profile lacks evidence, ask about
+  the user's experience with it, save the confirmed career fact, and re-score.
+  See [rollout](../HARNESS.md#after-the-first-milestone) for timing.
 - For preference questions, offer **No preference** and **I'm not sure yet**.
   Treat unanswered or undecided factors as **Unknown** and flag them for
   review when they could change the outcome.
@@ -68,7 +71,9 @@ Status: approved for writing on 18 November 2026.
   a partial match supported by the approved profile, or 0.0 for a clear gap.
 - Count each distinct skill requirement once. Divide the total points earned
   by the total possible points for a skills score from 0.0 to 1.0. If the
-  posting lists no assessable skills, show the skills score as **Unknown**.
+  posting lists no assessable skills, show **Unknown** and use **Needs review**
+  even if other categories pass. Ask for more detail when the posting itself
+  gives too little information.
 - If a listed skill has an unknown match, show a score range. Use zero points
   for that skill at the lower end and full points at the upper end. If the
   uncertainty could change whether the posting qualifies, explain what is
@@ -161,10 +166,11 @@ Status: approved for writing on 18 November 2026.
   and saves the selected changes.
 - When the user updates approved career facts, preferences, or scoring settings,
   automatically re-score saved postings they have yet to apply to.
-- Save the rating and supporting evidence for each assessed criterion. When
-  only a weight or cutoff changes, use the saved ratings to recalculate scores
-  or qualification locally. Reassess a criterion when a new fact changes the
-  evidence used to rate it.
+- Save ratings and evidence, including extracted numeric values and units.
+  Recalculate locally when existing evidence is sufficient. A weight change
+  recalculates a score. A new salary target uses the saved amount, such as
+  €4,000 per month. Raising only a category minimum can change the outcome
+  while the score stays the same. Reassess when relevant evidence changes.
 - Keep existing scores for postings marked **Applied** and preserve existing
   drafts regardless of application status.
 
