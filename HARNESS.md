@@ -795,13 +795,17 @@ on 18 November 2026.
 - Offer an optional monthly spending cap, off by default. The user chooses
   a cap in USD or EUR. When enabled, enforce it against estimated API charges
   from this app.
-- Before starting an AI request, check whether it would exceed the remaining
-  monthly token allowance or the enabled spending cap using the request's
-  input and maximum allowed output. After the request, use the reported
-  usage in place of the estimate. Queue work that would exceed either limit
-  and tell the user which limit blocked it. Continue importing job alerts
-  and allow manual editing. Queued work can resume when the relevant limit
-  resets or the user raises it.
+- Before starting an AI request, estimate usage from its input and maximum
+  allowed output. Check the account's remaining token allowance and enabled
+  spending cap, then reserve the estimated tokens and any estimated cost.
+  Check and reserve in one operation so concurrent jobs cannot use the same
+  allowance. Include outstanding reservations when checking either limit.
+- When usage is reported, replace the reservation with the reported token
+  counts and the cost estimate based on those counts. Queue a job that
+  would exceed either limit and tell the user which limit blocked it.
+  Recheck queued jobs when a reservation clears, the relevant limit
+  resets, or the user raises it. Continue importing job alerts and allow
+  manual editing while AI jobs are queued.
 - Explain API provider rate or spending limits separately from limits set in
   this app.
 
