@@ -18,7 +18,7 @@ follow the same approval and documentation process.
 
 The user's approval of project changes also authorizes routine Git operations
 needed to record and sync those changes, including staging, committing, and
-pushing to this project's existing private GitHub repository. Do not ask for
+pushing to this project's public GitHub repository. Do not ask for
 separate conversational permission for these operations. This does not override
 tool-enforced sandbox restrictions or authorize unrelated changes, destructive
 history rewrites, or changing repository visibility.
@@ -608,8 +608,12 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
   on GitHub. Require both sign-offs and passing CI checks before merge.
 - During CI setup, use a small PR to verify that the bot can open a PR, the user
   can approve it, and GitHub enforces both sign-offs and the CI checks in the
-  private repository. If GitHub asks the user to select **Approve workflows to
+  public repository. If GitHub asks the user to select **Approve workflows to
   run**, that starts the checks. The user submits their code review separately.
+- Use fictional data in public issues, pull requests, screenshots, and CI
+  output. During the human review, examine changes to `AGENTS.md` and
+  `.github/workflows/` for effects on what gets reviewed and what must pass
+  before merging.
 - Set up CI/CD. Run tests and build checks on PR revisions. Prepare a verified
   build for deployment and connect deployment when the hosting target is ready.
   Explain CI and CD during implementation by walking through the first pipeline
