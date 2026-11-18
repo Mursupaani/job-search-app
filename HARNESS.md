@@ -676,7 +676,8 @@ template import, writing styles, and manual reply logging approved on
 ## 7. Account access and recovery
 
 Status: invitation-only registration, email onboarding, password recovery,
-session handling, and account isolation approved on 18 November 2026.
+session handling, account isolation, and administrator-assisted deletion
+approved on 18 November 2026.
 
 ### Registration and invitations
 
@@ -726,6 +727,16 @@ session handling, and account isolation approved on 18 November 2026.
   an app session or email delivery.
 - When email-based recovery is added, verify the sign-in email before
   allowing a one-time password reset link to be sent to that address.
+
+### Account deletion
+
+- In the prototype, let the administrator delete an invited account from
+  the server at the user's request. Give the user a chance to download
+  their CVs and cover letters using the existing document controls.
+- Revoke the account's sessions and remembered sign-ins, cancel queued work,
+  and remove the account's profile, postings, companies, saved documents,
+  application history, and replies.
+- Defer self-service account deletion and full data export.
 
 ### Sessions
 
