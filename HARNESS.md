@@ -597,15 +597,19 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
 
 ### GitHub issues, review, and delivery
 
-- Work on one active GitHub issue at a time. Codex creates the issues and pull
-  requests. Each issue describes the expected behavior, how to verify it, and
-  what the user will learn about the stack.
+- Work on one active GitHub issue at a time. Codex creates the issues and uses
+  the built-in GitHub Actions bot to open pull requests. The user reviews with
+  their existing account. Each issue describes the expected behavior, how to
+  verify it, and what the user will learn about the stack.
 - Require two sign-offs on the latest revision before merging. An independent
-  agent reviews the PR automatically, and the user approves it on GitHub.
-  Open development PRs under an identity distinct from the user's. Use a
-  required status check for the agent's verdict if its review cannot count as
-  a required GitHub approval. Verify both merge requirements in the private
-  repository when setting up the workflow.
+  agent reviews the changes automatically and reports its verdict as a
+  required GitHub status check on the exact commit it reviewed. The agent can
+  run the review outside GitHub. The user submits a formal **Approve** review
+  on GitHub. Require both sign-offs and passing CI checks before merge.
+- During CI setup, use a small PR to verify that the bot can open a PR, the user
+  can approve it, and GitHub enforces both sign-offs and the CI checks in the
+  private repository. If GitHub asks the user to select **Approve workflows to
+  run**, that starts the checks. The user submits their code review separately.
 - Set up CI/CD. Run tests and build checks on PR revisions. Prepare a verified
   build for deployment and connect deployment when the hosting target is ready.
   Explain CI and CD during implementation by walking through the first pipeline
