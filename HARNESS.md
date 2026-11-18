@@ -627,8 +627,13 @@ template import, writing styles, and manual reply logging approved on
 
 - Offer optional CV and cover letter uploads during onboarding and later in
   **Template settings**. Allow the user to upload either document or both.
-  For each document, let the user recreate the uploaded layout in Typst or
-  use the built-in layout. Use the built-in layout when no sample is supplied.
+  In the prototype, offer a best-effort Typst recreation for `.docx` files
+  and PDFs with selectable text. Let the user choose a built-in layout
+  instead and preview the result before approval.
+- Use a built-in layout when no sample is supplied or the PDF is scanned.
+  If the uploaded layout cannot be recreated, offer a built-in layout and
+  let the user use any readable text as a writing sample. Defer optical
+  character recognition (OCR) for scans.
 - An uploaded CV can also supply career facts for review under section 3.
   Approve those facts separately from the template. Use a cover letter upload
   as a reference for layout and structure.
