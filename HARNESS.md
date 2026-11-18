@@ -77,7 +77,7 @@ Section 7 covers account provisioning, password recovery, and session handling.
 - Configure credentials, API keys, and environment-specific settings outside
   application source code.
 - Avoid required dependencies on proprietary services of a particular host.
-- Provide backup and restore procedures for profiles, postings, scores, and drafts.
+- Provide encrypted backups and a restore procedure as described in section 9.
 - Once deployed to an always-on host, check for supported job alerts daily at
   10:00 Helsinki time, independently of the user's Mac and without an open browser.
   Also provide a user-triggered Check now action.
@@ -662,3 +662,29 @@ usage controls approved on 18 November 2026.
   rendering previews.
 - Store account passwords using secure password hashing as described in
   section 1.
+
+## 9. Backups and restore
+
+Status: daily Google Drive backups and server restore approved on
+18 November 2026.
+
+### Setup and retention
+
+- Let the administrator connect a Google Drive account for backups. Request
+  `drive.file` access to manage backup files created by the app. Create
+  a private **Job Search Backups** folder in that Drive. This connection
+  does not request Gmail access.
+- Run an automatic backup once per day on the server, independently of the
+  administrator's browser and Mac. Include the app database and saved files.
+  Encrypt the backup before uploading it to Drive.
+- Keep 30 days of backups in Drive. Keep the recovery key separately from
+  the backup files, such as in the administrator's password manager.
+
+### Restore
+
+- Let the administrator download a dated backup directly from Google Drive
+  without a running app server.
+- Provide a restore command to recover the app on a fresh server using the
+  downloaded backup and the recovery key.
+- After restoring, sign in and verify that the profile, settings, postings,
+  drafts, and application history are available.
