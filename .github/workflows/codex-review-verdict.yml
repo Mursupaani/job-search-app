@@ -1,0 +1,32 @@
+name: Codex review verdict
+
+on:
+  issue_comment:
+    types: [created, edited, deleted]
+
+permissions: {}
+
+concurrency:
+  group: codex-review-verdict-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.event.issue.pull_request && github.event.comment.user.id == 199175422
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      checks: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      PR_NUMBER: ${{ github.event.issue.number }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff38c9191f09f0 # v6.0.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - run: python3 -B .github/scripts/codex_review_status.py

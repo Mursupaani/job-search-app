@@ -1,0 +1,19 @@
+name: Repository checks
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Repository smoke check
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff38c9191f09f0 # v6.0.2
+        with:
+          persist-credentials: false
+      - run: python3 -B -m unittest discover -s .github/scripts -p 'test_*.py' -v
