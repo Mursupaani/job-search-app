@@ -333,6 +333,11 @@ Status: initial rules approved. Scoring details remain open.
   **No preference** out of scoring.
 - Let the user edit the multiplier in **Matching settings** to change how
   much the criterion counts without changing whether they want or avoid it.
+- Before saving, compare the final weight magnitudes within each direction.
+  A mild preference may equal the weight of a strong preference in the same
+  direction but may not exceed it. Apply this rule to preferences both to
+  have and to avoid. If the rule fails, prevent saving, explain which weights
+  conflict, and show the highest multiplier allowed for the mild preference.
 
 ### Interests scoring
 
