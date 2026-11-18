@@ -261,6 +261,11 @@ retention, and profile page approved on 18 November 2026.
 - Let the user upload a profile photo and choose whether to include it when
   reviewing a CV draft. Leave the photo off by default. Omit the photo from
   cover letters.
+- If saved CVs use the previous photo when the user replaces it, ask whether
+  to keep that photo in those CVs or replace it with the new one. Apply the
+  choice only to CVs that use the previous photo.
+- Store each photo once per account even if several CVs use it. Remove a
+  previous photo when the profile and saved CVs no longer reference it.
 
 ### Guided preferences
 
@@ -599,6 +604,8 @@ template import, writing styles, and manual reply logging approved on
 - Let the user link the exact versions of the CV and cover letter they used.
   Preserve those versions if the user edits a draft later. The user can mark
   a role **Applied** without linking either document.
+- If the user explicitly replaces the photo in a submitted CV under section 3,
+  keep its wording and layout and label it **Photo updated after submission**.
 
 ### Companies
 
