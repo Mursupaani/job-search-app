@@ -49,8 +49,8 @@ account from the beginning. Public registration is disabled initially.
 
 For the prototype, accept only job postings pasted into the app as text. Let
 the user save the original link if available. Assess the posting against the
-approved profile, explain the result, and generate a CV and cover letter when
-the posting qualifies or the user chooses to proceed after review.
+approved profile and explain the result. Let the user choose which drafts to
+generate as described in section 5.
 
 ### Initial capabilities
 
@@ -58,7 +58,7 @@ the posting qualifies or the user chooses to proceed after review.
   requirements, showing separate scores and explanations.
 - Show **Matches** and **Needs review** on the website as pasted postings
   are processed. Defer email digests beyond the prototype's core workflow.
-- Recommend CV changes and draft a cover letter for qualifying positions.
+- Offer CV and cover-letter drafting on the user's request.
 - Draft cover letters in Finnish or English according to the posting's language.
 - Present CV recommendations and cover letters for the user's review.
 
@@ -169,9 +169,9 @@ The [matching interview](docs/matching.md#guided-preferences) collects the user'
 
 ### Application CVs
 
-- Keep one reusable Typst template for CV layout and formatting. When a posting
-  qualifies, generate a tailored, standalone `.typ` draft from the current
-  template. Draft generation leaves the template intact.
+- Keep one reusable Typst template for CV layout and formatting. When the user
+  chooses to generate a CV, create a tailored, standalone `.typ` draft from
+  the current template. Draft generation leaves the template intact.
 - Follow the template's layout. Make only small layout adjustments when the
   content needs more room or the change improves readability.
 - Select and condense approved career-profile facts that are most relevant to
@@ -244,13 +244,19 @@ approved on 18 November 2026.
 
 ### Drafting and review
 
-- Generate the tailored CV and cover letter together when a posting qualifies
-  or when the user chooses to proceed with a **Needs review** posting.
+- For a **Match**, offer **Generate CV**, **Generate cover letter**, and
+  **Generate both**. Start drafting only after the user explicitly chooses
+  an action, and generate the selected documents.
+- For a **Needs review** posting, show the review summary first. Let the user
+  address the reason for review or choose to proceed with the uncertainty
+  visible. If the user confirms new facts, re-score before they decide. Offer
+  the same three drafting actions after the user chooses to proceed.
 - Use only facts supported by the user's approved career profile. The cover
   letter may expand on relevant examples that the tailored CV leaves out.
-- Before presenting the drafts for review, check each draft against the
-  approved profile and cross-check the two drafts against each other. Check
-  claims about dates, titles, qualifications, skills, and responsibilities.
+- Before presenting a new draft for review, check it against the approved
+  profile. When both types of draft exist for the posting, cross-check them,
+  including when one was generated separately. Check claims about dates,
+  titles, qualifications, skills, and responsibilities.
 - Show the relevant passages together when the drafts conflict and ask the
   user to resolve the discrepancy.
 - After the user saves a wording change in either draft, run the consistency
@@ -319,8 +325,8 @@ template import, writing styles, and manual reply logging approved on
 
 ### Saved documents and templates
 
-- Automatically save both drafts as standalone `.typ` files with the job
-  posting when they are generated. Let the user reopen either document and
+- Automatically save each generated draft as a standalone `.typ` file with
+  the job posting. Let the user reopen either document and
   render a PDF preview on demand. Saved files render independently of later
   changes to the default templates.
 - Provide **Use as starting point** to copy a saved CV or cover letter into
@@ -644,9 +650,12 @@ The milestone is complete when the user can do the following.
    link. See evidence for the separate skills, interests, and practical fit
    scores. Verify a **Match** and a **Needs review** result, including the short
    explanation of why the latter needs review.
-4. **Generate, review, and export both drafts.** Generate the CV and cover
-   letter together using the built-in layouts. Review the CV diff and any
-   consistency findings. Edit both drafts, render previews, and download PDFs.
+4. **Choose, review, and export drafts.** Verify that a **Match** waits for a
+   drafting choice and a **Needs review** posting shows its review first.
+   Try **Generate CV**, **Generate cover letter**, and **Generate both**
+   with the built-in layouts. Verify that each action generates its selected
+   documents. Review the CV diff and any consistency findings. Edit both
+   drafts, render previews, and download PDFs.
 5. **Record the submission and verify persistence.** Mark the posting
    **Applied** and link the exact CV and cover-letter versions used. Save a
    later edit and check that the application still opens the selected versions.
