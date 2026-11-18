@@ -25,9 +25,14 @@ account from the beginning. Public registration is disabled initially.
 
 ### Supported inputs
 
-- Job-alert emails from LinkedIn, Duunitori, and Jobly, received in the dedicated
-  Gmail account described in section 2.
-- Job postings pasted directly into the app as text.
+- Start with job postings pasted directly into the app as text. Let the user
+  save the original link if available. Assess the posting against the approved
+  profile, explain the result, and generate a CV and cover letter when the
+  posting qualifies or the user chooses to proceed after review.
+- Add Gmail job-alert intake later, targeting LinkedIn, Duunitori, and Jobly.
+  Feed imported postings into the same assessment and drafting workflow.
+  Enable automatic full-text retrieval source by source as described in
+  section 2.
 
 Email processing is limited to alerts from these enabled job-search sources.
 Unrelated email must not be read into the matching workflow, stored, logged, or
@@ -106,7 +111,8 @@ Status: approved for writing on 17 November 2026. Open decisions are listed belo
 ### Mailbox and enabled sources
 
 - Use `mursupaani.dev@gmail.com` as the project owner's dedicated Gmail account.
-- Initially support job alerts from LinkedIn, Duunitori, and Jobly.
+- Target job alerts from LinkedIn, Duunitori, and Jobly when Gmail intake is
+  added after the pasted-posting milestone.
 - The user arranges delivery or forwarding of those alerts to this account.
 - Connect only the dedicated Gmail account configured for each user as
   described in section 7. The app does not need access to the user's main
@@ -163,10 +169,12 @@ templates must not be guessed during implementation.
 
 ### Full posting retrieval and incomplete alerts
 
-- When an eligible alert contains only a preview, automatically try to retrieve
-  the full job description from its posting link, unless the alert is already
-  identified as a role marked **Applied**.
-- If retrieval fails, requires login, or still yields only partial content,
+- Use the alert text for assessment when it contains enough job detail.
+- Enable automatic full-text retrieval only for sources where the intended
+  automated access and use have been confirmed as permitted. When an eligible
+  alert from such a source contains only a preview, try its posting link unless
+  the role is already marked **Applied**.
+- If retrieval is unavailable, fails, requires login, or yields only partial content,
   mark the posting **Incomplete** and show it in the app with this prompt:
   "We couldn't retrieve enough information to assess this role. Add the full
   job posting or review it manually."
