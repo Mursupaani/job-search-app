@@ -67,8 +67,7 @@ does not authorize sending them to an employer.
 - Keep public registration disabled. Create accounts through the setup and
   invitation flow in section 7.
 
-Section 7 covers account provisioning. Password recovery and session handling
-remain open.
+Section 7 covers account provisioning, password recovery, and session handling.
 
 ### Deployment and background operation
 
@@ -540,8 +539,8 @@ logging approved on 18 November 2026.
 
 ## 7. Account access and recovery
 
-Status: invitation-only registration and email onboarding approved on
-18 November 2026. Recovery and session handling remain open.
+Status: invitation-only registration, email onboarding, password recovery,
+and session handling approved on 18 November 2026.
 
 ### Registration and invitations
 
@@ -562,3 +561,20 @@ Status: invitation-only registration and email onboarding approved on
   does not grant mailbox access.
 - When the dedicated Gmail connection is complete, record the import-start
   timestamp and begin checking for eligible alerts as described in section 2.
+
+### Password recovery
+
+- Send a one-time password reset link to the account's verified sign-in
+  email address.
+- Provide a server CLI command as a fallback for administrator recovery.
+  Run it from a terminal on the server, such as over SSH. Prompt for the
+  new password without echoing it or passing it as a command-line argument.
+  Recovery through this command requires server access and works without
+  an app session or email delivery.
+
+### Sessions
+
+- Offer **Remember me** at sign-in to keep the user signed in across browser
+  restarts. Without it, use a session intended to end when the browser closes.
+- Invalidate all existing sessions for the account after a password reset,
+  whether it was done using the email link or the server CLI command.
