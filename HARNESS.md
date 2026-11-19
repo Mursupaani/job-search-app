@@ -74,7 +74,8 @@ does not authorize sending them to an employer.
 
 - Include username and password protection from the first version.
 - Each account has a unique username and a unique email address.
-- Allow sign-in using either the username or email address with the same password.
+- Allow sign-in using either the username or email address with the same
+  password. Reserve `@` for email sign-in and reject it in usernames.
 - Start with one administrator account for the project owner.
 - Protect private app pages, stored data, and API endpoints with authentication.
 - Store passwords using secure password hashing, never as plaintext.
@@ -223,11 +224,13 @@ processed. Later email delivery is covered in [Email digests](docs/deferred-inte
 
 ### Incomplete postings
 
-- Keep postings with only partial text visible as **Incomplete**.
-- Let the user review the available details in the existing record or add the
-  full posting to that record. Evaluate the completed description.
-- Keep the incomplete status visible until sufficient posting text is available.
-  Any assessment based on partial content must be identified as incomplete.
+- Keep postings that appear cut off or refer to missing parts of the
+  description visible as **Incomplete**. Identify any assessment of partial
+  content as incomplete.
+- Let the user review the available details, add the missing text to the
+  existing record, or select **This is the full posting**. Apply the
+  [normal matching rules](docs/matching.md#qualification-and-review) when
+  sufficient text is available or the user confirms the posting is complete.
 
 ### Data retention
 
@@ -285,11 +288,26 @@ approved on 18 November 2026.
   Use the editable content and formatting to generate a standalone `.typ`
   draft. Update that draft when the user saves edits. The first version omits
   tables, images, and custom page layouts.
+- For both documents, store the wording as text and keep supported formatting
+  as structured data. Generate Typst with app-controlled formatting and
+  pass the wording as literal text. Validate link destinations against the
+  supported URL schemes before making links clickable.
 - Render a PDF preview automatically for the first draft. After edits, let
   the user refresh the preview on demand. **Download PDF** renders the latest
   version, including edits made since the last preview.
 - Provide **Copy letter** for application forms. Copy plain text with readable
   paragraph breaks and list markers.
+- Test a fictional cover letter with literal characters such as `#` and `$`,
+  a list, and a link. Verify the wording and expected formatting in the
+  editor, copied letter, and PDF.
+
+**Open for drafting.** Clarify that drafts belong to postings and that a
+recorded application can reference the exact versions submitted. Align this
+section with the [document relationships](docs/database-schema.md#applications-and-documents).
+
+**Open for Typst export.** Choose how to pin the compiler and fonts. Check
+that a saved document keeps its page breaks when rendered on a fresh
+installation.
 
 ## 6. Application tracking
 
@@ -377,6 +395,9 @@ template import, writing styles, and manual reply logging approved on
   writing reads. Use the same facts when previewing different styles.
   Ask for confirmation before replacing a default.
 
+**Open for uploads.** Link this section and [CV import](#cv-import-and-verified-profile)
+to the upload timing in [section 10](#after-the-first-milestone).
+
 ### Upload and preview safety
 
 - Accept PDF and `.docx` documents and JPEG or PNG profile photos. Verify
@@ -424,6 +445,9 @@ approved on 18 November 2026.
 - Check ownership on the server for every read or change, including direct
   links to previews and downloads. Run background jobs under the account
   that owns the work.
+- When linking private records, verify that the current account owns both
+  records. Enforce this relationship in PostgreSQL where practical, as
+  described in the [database schema](docs/database-schema.md#ownership-of-linked-records).
 - Verify that an attached version belongs to the account and posting and
   matches the selected document type. Test that two accounts can each attach,
   download, and render their own CV and that cross-account attempts are denied.
@@ -445,6 +469,10 @@ approved on 18 November 2026.
   an app session or email delivery.
 - When email-based recovery is added, verify the sign-in email before
   allowing a one-time password reset link to be sent to that address.
+
+**Open for password recovery.** Define how a successful reset, including CLI
+recovery, invalidates all outstanding reset links and sessions for the
+account. Test with two reset links and an existing session.
 
 ### Account deletion
 
@@ -510,12 +538,25 @@ on 18 November 2026.
   user for a clean excerpt before proceeding with the AI task.
 - Offer **Preview AI requests before sending**. When enabled, pause each
   request, including background and follow-up calls. Show the exact content
-  after redaction and offer **Send** and **Cancel**. Apply redaction either way.
+  after redaction and offer **Send** and **Cancel**. Selecting **Send** opens
+  a confirmation step with the preview still visible and changes the button
+  to **Confirm**. Only **Confirm** authorizes a single request with that
+  exact redacted content. Allow cancellation before sending.
+- Recheck ownership and applicable limits before sending. If a request waits
+  for budget, carry forward the confirmation for that exact content. If the
+  content changes before sending, show the updated preview and require
+  **Send** followed by **Confirm** again. Apply redaction even when previews
+  are disabled.
 - Send Responses API requests with `store: false`. Explain that separate
   abuse-monitoring logs can generally retain content for up to 30 days.
   See [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data).
 - Insert the user's selected name, contact details, links, and optional CV
   photo locally when rendering the application documents.
+
+**Open before the first live AI call.** Define how confirmation remains tied
+to the exact redacted request across restarts and how one worker claims it
+for dispatch. Test that two workers send one confirmed request once and that
+a restart before confirmation makes no provider call.
 
 ### Model selection
 
@@ -547,8 +588,11 @@ on 18 November 2026.
   app in USD or EUR. Apply it across all accounts, alongside each account's
   own limits. When an account is deleted, carry its spending into the shared
   monthly total without its account identifier. Cancel queued requests.
-  Keep reservations for already-sent requests against the shared cap,
-  reconcile them if usage arrives, and release unconfirmed ones at reset.
+  Keep a reservation for each already-sent request against the shared cap.
+  Use a random attempt identifier and retain the billing month, reserved
+  amount, and applicable prices and exchange rate. Keep this record free of
+  account identifiers and request content. Reconcile each reservation once
+  when usage arrives and release unconfirmed reservations at reset.
 - Before starting an AI request, estimate usage from its input and maximum
   allowed output. Check the account's remaining token allowance and all
   enabled spending caps, then reserve the estimated tokens and any known
@@ -563,6 +607,11 @@ on 18 November 2026.
   add postings, edit drafts, and track applications while AI jobs are queued.
 - Explain API provider rate or spending limits separately from limits set in
   this app.
+
+**Open for monetary caps.** Check that the selected models and settings can
+be priced for every billable part of a request, including cache writes where
+applicable. Decide when personal and shared caps take effect if spending
+earlier in the billing month is unknown.
 
 ### AI request retries
 
@@ -588,7 +637,9 @@ on 18 November 2026.
   models. Use [OpenAI's published rates](https://developers.openai.com/api/docs/pricing)
   for input, cached input, and output. The administrator verifies the rates
   weekly and before offering a new model. Apply rate changes to future
-  requests and preserve the estimates already recorded.
+  requests and preserve the estimates already recorded. Use the prices and
+  exchange rate recorded at the start of each request to estimate its cost
+  from the reported usage.
 - Show the date and time each selected model's prices were last updated in
   **AI settings**. If pricing is missing for any selected model, disable
   enabling the spending cap and identify the model that is missing prices.
@@ -607,6 +658,11 @@ on 18 November 2026.
 
 - Encrypt all user data at rest and in transit, including career profiles,
   saved postings, CVs, cover letters, application records, replies, and backups.
+- For the fictional-data milestone, use encrypted storage for PostgreSQL
+  and temporary document files. Encrypt backups separately. Encrypt the
+  shared OpenAI API key on the server with a key kept separately.
+- Before using real CVs or inviting another user, decide whether a copy of
+  the database must be unreadable without a separate application key.
 - Keep encryption keys separate from the stored data. The server may decrypt
   data as needed for authorized operations such as matching, drafting, and
   rendering previews.
@@ -626,6 +682,21 @@ approved on 18 November 2026.
   keep the recovery key separately. Restore into a fresh installation and
   verify that a posting, its application history, and the exact linked CV
   are available and that the CV renders.
+
+### Restore safeguards
+
+- Keep sign-in and background jobs paused during restore. Invalidate restored
+  sessions and one-time links before reopening sign-in. Check unfinished AI
+  requests against the [retry policy](#ai-request-retries) before resuming
+  background jobs.
+- Before inviting other users, define how long deleted accounts can remain
+  in encrypted backups and how to reapply account deletions made after a
+  snapshot before reopening a restored app.
+
+**Open before relying on backups with real data.** Define how to hold
+restored paid work for review and reconcile spending since the snapshot.
+Test with a backup taken while a job is queued and restored after that job
+has run.
 
 The later [Google Drive backup and restore procedure](docs/deferred-integrations.md#google-drive-backups-and-restore) covers scheduled backups, retention, and recovery on a fresh server.
 
@@ -670,6 +741,11 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
 - Make learning full-stack development a project goal. Walk through the code
   and show how to exercise each change locally when presenting its PR for review.
 
+**Open for the next review workflow update.** Document who can authorize a
+recovery and how a repair PR can receive independent review and passing CI if
+the default branch's parser stops recognizing Codex verdicts. Include
+`.github/scripts/` in the human review of changes to the review workflow.
+
 ### First build milestone
 
 Run the application workflow locally on the user's Mac, from approving a
@@ -683,8 +759,10 @@ The milestone is complete when the user can do the following.
    for assessment and drafting.
 2. **Complete a short setup interview.** Answer questions about skills,
    interests, and practical requirements. Review, adjust, and approve the
-   suggested scoring minimums and weights. Change an answer and verify that
-   the resulting settings affect the relevant score as expected.
+   suggested scoring minimums and weights. Verify both
+   [recalculation examples](docs/matching.md#recalculation-examples): a weight
+   change updates the score, and a minimum change can update the outcome
+   with the same score.
 3. **Save and assess a pasted posting.** Save the text and an optional source
    link. See evidence for the separate skills, interests, and practical fit
    scores. Verify a **Match** and a **Needs review** result, including the short
@@ -708,8 +786,10 @@ drafts. Trace **Save posting** from the React form through the Node.js API
 to the PostgreSQL row, then follow the worker's result back to the browser.
 Walk through the CI checks on the PR that introduces the feature.
 Enable AI request preview during the fictional walkthrough to verify
-redaction and check that failure logs omit raw content. Test a restart with
-an unconfirmed request and marking a posting **Applied** during assessment.
+redaction, the **Send** to **Confirm** sequence, cancellation, repeated
+confirmation, and a content change before sending. Check that failure logs
+omit raw content. Test a restart with an unconfirmed request and marking a
+posting **Applied** during assessment.
 Verify that a submitted CV renders with its saved email and layout after
 changing the profile email and default template.
 
@@ -719,8 +799,20 @@ changing the profile email and default template.
    GitHub Actions bot opens it, the user can approve it, and GitHub requires the
    user approval, independent review check, and passing CI on the latest
    revision before merge.
-2. **Save and reopen a pasted posting.** Build the first feature across the
-   browser, API, and database.
+2. **Save one pasted posting in PostgreSQL.** Use the agreed
+   [first migration schema](docs/database-schema.md#first-migration).
+   Apply the migration to an empty test database and create one fictional
+   account. Save one posting with a source URL and one without. Read both
+   by ID and verify the owner, exact pasted text, source URL or `NULL`, and
+   the creation time set by PostgreSQL. Verify that PostgreSQL rejects a
+   posting whose owner does not exist. Run the same database test locally
+   and in the existing **Repository smoke check**. Walk through
+   `CREATE TABLE`, `INSERT`, and `SELECT`.
+
+Build sign-in, the authenticated posting API, the React form, and assessment
+queueing in later issues. Keep each issue small enough to verify and explain
+on its own. Saving and reopening a posting in the browser is a checkpoint
+spanning the database, sign-in, API, and form issues.
 
 ### After the first milestone
 
