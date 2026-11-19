@@ -171,5 +171,7 @@ live email during harness preparation.
   without a running app server.
 - Provide a restore command to recover the app on a fresh server using the
   downloaded backup and the recovery key.
+- Apply the [restore safeguards](../HARNESS.md#restore-safeguards) before
+  reopening sign-in and restarting background jobs.
 - After restoring, sign in and verify that the profile, settings, postings,
   drafts, and application history are available.

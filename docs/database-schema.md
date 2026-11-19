@@ -4,6 +4,31 @@ This is the design to review before writing PostgreSQL migrations. The
 [development harness](../HARNESS.md) defines app behavior and the approval
 process. [Job matching](matching.md) defines the scoring rules.
 
+## First migration
+
+The [first application issue](../HARNESS.md#first-development-issues) creates
+two tables. The initial `accounts` table has a PostgreSQL-generated integer
+primary key, `id`. The database test uses it to create a fictional owner.
+The sign-in issue adds the account fields listed below.
+
+| `job_postings` field | What it stores |
+| --- | --- |
+| `id` | A PostgreSQL-generated integer primary key. |
+| `owner_id` | A required foreign key to `accounts.id`. |
+| `original_text` | The required posting text as pasted. |
+| `source_url` | The source URL as text. Use `NULL` when no URL is supplied. |
+| `created_at` | The creation timestamp, set by PostgreSQL when it inserts the row. |
+
+Later posting features add the remaining fields and relationships described
+below.
+
+## Ownership of linked records
+
+Relationships between account-owned records must stay within one account. For
+example, a posting and its company must share an owner. Use owner-aware
+foreign keys in PostgreSQL where practical, alongside the
+[server ownership checks](../HARNESS.md#account-isolation).
+
 ## Accounts and profiles
 
 | Table | One row represents | Fields and relationships |
@@ -59,17 +84,19 @@ label in the app.
 | Table | One row represents | Fields and relationships |
 | --- | --- | --- |
 | `background_jobs` | A queued task | Owner, task type, related posting when applicable, input evidence used to check freshness, queue time, and status. |
-| `ai_requests` | An attempt to call OpenAI | Account, originating job when applicable, model, reservation and reported usage, estimated cost, and the exchange rate used when applicable. A job can make multiple requests. |
+| `ai_requests` | An attempt to call OpenAI | Random attempt ID, account, originating job when applicable, model, reservation and reported usage, prices and exchange rate at request start when applicable, and estimated cost. A job can make multiple requests. |
 | `model_prices` | A supported model's pricing | Input, cached input, and output rates, with the date and time they were last verified. Updates apply to future requests. |
 | `exchange_rates` | A published ECB rate | Publication date and US dollars per euro. Save the rate used for a converted estimate so the calculation can be reproduced. |
 | `account_ai_settings` | An account's AI settings | Model choices, monthly token limit, and optional monthly spending cap and currency. |
 | `app_ai_settings` | Shared AI settings | Optional app-wide monthly spending cap and currency. |
-| `deleted_account_spending` | Shared usage carried over for a billing month | Confirmed spending and outstanding reservations by month, without the account identifier. |
+| `deleted_account_spending` | Confirmed spending carried over to the shared cap | Billing month and confirmed spending. |
+| `deleted_account_reservations` | An already-sent request awaiting reconciliation after account deletion | Random attempt ID, billing month, reserved amount, prices and exchange rate used when applicable, and reconciliation state. Store only what is needed to settle the reservation. |
 
-Save a new posting and queue its assessment in one transaction. A worker can
-read the queued task from PostgreSQL after a restart. Before making an AI
-request, check the active limits and reserve usage in one transaction. When
-reported usage arrives, record it and release any unused reservation. Follow
+Once the application schedules assessments, save a new posting and queue its
+assessment in one transaction. A worker can read the queued task from
+PostgreSQL after a restart. Before making an AI request, check the active limits
+and reserve usage in one transaction. When reported usage arrives, record it
+and release any unused reservation. Follow
 the [AI usage and pricing rules](../HARNESS.md#8-ai-usage-spending-and-data-protection)
 for caps, retries, missing prices, and account deletion.
 

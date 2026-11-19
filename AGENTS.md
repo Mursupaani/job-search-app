@@ -1,5 +1,13 @@
 # Job Search App review guidance
 
+## Before publishing changes to GitHub
+
+Before publishing each revision, inspect the exact files and filenames being
+published for the personal information and secrets described below. Open
+screenshots and other visual files when they are included. Remove sensitive
+details or replace them with fictional values before pushing a branch or
+creating a commit directly on GitHub.
+
 ## Code Review Rules
 
 ### Check every change for personal information and secrets
