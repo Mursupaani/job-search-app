@@ -706,6 +706,8 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
 
 - Build the browser interface in React and TypeScript. Use a Node.js HTTP API
   written in TypeScript and PostgreSQL for persistence.
+- Before starting the first issue that needs a new framework, library, or tool,
+  compare the practical options together and agree on which to use.
 - Review the [database schema](docs/database-schema.md) together before writing
   migrations. Use the job-posting workflow to trace the path from a browser
   request through API validation and ownership checks to a database write.
