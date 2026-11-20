@@ -1,5 +1,13 @@
 # Job Search App review guidance
 
+## Tool use
+
+Use command-line tools first for all project work, including `git` and `gh`
+for Git and GitHub. If a command-line tool is unavailable or cannot complete
+the task, explain to the user what the CLI could not do and why you need the
+alternative before attempting to use it. This includes opening a browser or
+triggering a browser access prompt.
+
 ## Before publishing changes to GitHub
 
 Before publishing each revision, inspect the exact files and filenames being
