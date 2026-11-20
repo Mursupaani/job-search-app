@@ -741,6 +741,17 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
 - Make learning full-stack development a project goal. Walk through the code
   and show how to exercise each change locally when presenting its PR for review.
 
+  I’m learning full-stack development. Keep each issue focused on one small
+  behavior that I can run, inspect, and explain myself. Before starting, tell me
+  what I’ll learn, what we’ll build, and how I’ll see that it works. If
+  understanding the change requires several unfamiliar concepts, propose a
+  smaller first step.
+
+  During the walkthrough, start with the simplest working example, then show how
+  the pieces fit together. Explain new tools and terms when we first use them.
+  Give me a small change I can make or a result I can predict to check my
+  understanding. Wait for me to say I’m ready before moving to the next issue.
+
 **Open for the next review workflow update.** Document who can authorize a
 recovery and how a repair PR can receive independent review and passing CI if
 the default branch's parser stops recognizing Codex verdicts. Include
@@ -813,6 +824,19 @@ Build sign-in, the authenticated posting API, the React form, and assessment
 queueing in later issues. Keep each issue small enough to verify and explain
 on its own. Saving and reopening a posting in the browser is a checkpoint
 spanning the database, sign-in, API, and form issues.
+
+#### PostgreSQL walkthrough
+
+Use one PR with three walkthrough checkpoints.
+
+1. **Create the tables.** Inspect one column that links the tables. *Which
+   value tells us who owns a posting?*
+2. **Save and retrieve a posting.** Insert it, capture its ID, and use that ID
+   in a `SELECT`. *If I leave out the URL, what do I expect to read back?*
+3. **Test the ownership rule.** Try saving a posting for an account that
+   doesn’t exist. *Which part of the table definition makes PostgreSQL reject it?*
+
+Then open the CI run and find the same test you just ran locally.
 
 ### After the first milestone
 
