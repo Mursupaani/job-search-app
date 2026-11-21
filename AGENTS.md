@@ -33,6 +33,14 @@ sources such as standards bodies, official documentation, and security
 guidance. Explain what applies to this project and cite the sources that
 inform the proposed approach.
 
+## Dependency versions
+
+Before adding or changing a dependency pin, check where the project already
+declares it. When local development, tests, CI, or deployment need the same
+version, have them read the same declaration or call the same script.
+Link setup documentation to that declaration. Let the package manager
+generate its lockfile.
+
 ## Before publishing changes to GitHub
 
 Before starting issue work or opening a pull request, follow the
