@@ -74,6 +74,8 @@ does not authorize sending them to an employer.
 
 - Include username and password protection from the first version.
 - Each account has a unique username and a unique email address.
+- Usernames have 3–32 characters. Use lowercase ASCII letters, digits, and
+  single hyphens between letters or digits.
 - Allow sign-in using either the username or email address with the same
   password. Reserve `@` for email sign-in and reject it in usernames.
 - Start with one administrator account for the project owner.

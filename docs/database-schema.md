@@ -9,7 +9,7 @@ process. [Job matching](matching.md) defines the scoring rules.
 The [first application issue](../HARNESS.md#first-development-issues) creates
 two tables. The initial `accounts` table has a PostgreSQL-generated integer
 primary key, `id`. The database test uses it to create a fictional owner.
-The sign-in issue adds the account fields listed below.
+The password verification exercise adds a username and password hash.
 
 | `job_postings` field | What it stores |
 | --- | --- |
@@ -46,6 +46,32 @@ Expect one foreign-key error for the fictional owner ID `0` followed by three
 passing rows. The test checks that the error code is `23503` and exits
 unsuccessfully if an assertion fails. In GitHub, open **Repository smoke
 check** and expand **Test saving job postings in PostgreSQL** for the same output.
+
+## Password verification exercise
+
+The [second migration](../db/migrations/002_account_passwords.sql) adds a unique
+username and a password hash to an account. Choose a username of 3–32
+characters using lowercase ASCII letters, digits, and single hyphens between
+letters or digits. For example, `fictional-greenhouse-2` is valid. The
+`@` character is reserved for email sign-in. PostgreSQL enforces the
+username format. Existing accounts keep their IDs and can have both fields
+empty until they receive credentials.
+
+Run this from the repository root with Docker running.
+
+```sh
+bash db/test-postgresql.sh --verify-password
+```
+
+The test uses a fresh PostgreSQL 19.0 database, the pinned Node.js 26.13.1
+runtime, and the `pg` driver. It generates a disposable fictional password and
+stores its Argon2id hash. The verifier looks up the account using a
+parameterized SQL query and returns the account ID only for the correct
+password. A wrong password and an unknown username both return `null`.
+
+In GitHub, open **Repository smoke check** and expand **Test verifying an
+account password in PostgreSQL**. See the [Node.js Argon2 API](https://nodejs.org/api/crypto.html#cryptoargon2algorithm-parameters-callback)
+and [OWASP guidance on Argon2id](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#argon2id).
 
 ## Ownership of linked records
 
