@@ -37,10 +37,14 @@ inform the proposed approach.
 
 Before starting issue work or opening a pull request, follow the
 [GitHub delivery rules](HARNESS.md#github-issues-review-and-delivery).
-Find or create the issue the change addresses, then include its link in the
-description passed to the project's PR-opening workflow. Use `Closes #123`
-when merging the PR should close issue 123. Before reporting the PR ready,
-check its published description for the intended issue link.
+Find or create the issue the change addresses. Open the PR through
+`gh workflow run open-development-pr.yml --ref main`, passing the branch,
+title, and body. Include the issue link in the body. Use `Closes #123` when
+merging the PR should close issue 123. The workflow opens the PR as the
+GitHub Actions bot so the maintainer can approve it. A local `gh pr create`
+uses the signed-in account and can prevent that account from approving.
+If the workflow fails, diagnose it and retry through the bot. After opening,
+verify the bot author and the intended issue link on the published PR.
 
 Before publishing each revision, inspect the exact files and filenames being
 published for the personal information and secrets described below. Open
