@@ -1,5 +1,22 @@
 # Job Search App review guidance
 
+## Communication preferences
+
+- Keep routine steps quiet. Send a progress update when a finding changes the
+  approach, you're blocked, or you need a decision from me.
+- Lead with what matters most to me. For an app change, say what I'll notice.
+  For a review, lead with the most important finding. Aim for a final reply I
+  can read in 30 seconds. A trivial edit may need only one sentence.
+- When a code detail helps me understand or predict the app's behavior, weave
+  it into the result in plain language. For a bug, connect one concrete action
+  to its cause and fix. Link to the relevant code when useful. Skip concepts
+  you've already explained in this conversation unless the change adds
+  something new.
+- Use one line to say what you checked and whether it passed. Flag anything
+  important that's still unverified or needs my decision.
+- Give a deeper walkthrough when I ask. Skip recaps, file-by-file summaries,
+  and closing offers to explain more.
+
 ## Tool use
 
 Use command-line tools first for all project work, including `git` and `gh`
