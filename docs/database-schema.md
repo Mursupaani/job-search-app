@@ -24,9 +24,11 @@ below.
 
 ### Run the first migration exercise
 
-The project uses PostgreSQL 19. Local runs and the **Repository smoke check**
-both use the official `postgres:19` image so patch updates stay within that
-major version.
+The project uses PostgreSQL 19.0 for this exercise. Local runs and the
+**Repository smoke check** use the same official image release pinned by
+digest in `db/test-postgresql.sh`. The digest identifies a specific image build.
+To upgrade PostgreSQL, update the version and digest together and rerun the
+exercise.
 
 With Docker running, run this command from the repository root.
 

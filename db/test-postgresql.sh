@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-container=$(docker run --detach --rm --network none --pull always \
+container=$(docker run --detach --rm --network none \
     --env POSTGRES_HOST_AUTH_METHOD=trust \
     --env POSTGRES_DB=job_search_test \
-    postgres:19)
+    postgres:19.0@sha256:bb6e70add742cd868fb62cb3b2f67d1dd2bdd2b65a521e778420748753687c60)
 trap 'docker stop "$container" >/dev/null' EXIT
 
 # The image starts a temporary socket-only server to initialize the database.
