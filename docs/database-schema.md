@@ -50,9 +50,12 @@ check** and expand **Test saving job postings in PostgreSQL** for the same outpu
 ## Password verification exercise
 
 The [second migration](../db/migrations/002_account_passwords.sql) adds a unique
-username and a password hash to an account. Usernames cannot contain `@`.
-Existing accounts keep their IDs and can have both fields empty until they
-receive credentials.
+username and a password hash to an account. Choose a username of 3–32
+characters using lowercase ASCII letters, digits, and single hyphens between
+letters or digits. For example, `fictional-greenhouse-2` is valid. The
+`@` character is reserved for email sign-in. PostgreSQL enforces the
+username format. Existing accounts keep their IDs and can have both fields
+empty until they receive credentials.
 
 Run this from the repository root with Docker running.
 
