@@ -18,6 +18,13 @@ inform the proposed approach.
 
 ## Before publishing changes to GitHub
 
+Before starting issue work or opening a pull request, follow the
+[GitHub delivery rules](HARNESS.md#github-issues-review-and-delivery).
+Find or create the issue the change addresses, then include its link in the
+description passed to the project's PR-opening workflow. Use `Closes #123`
+when merging the PR should close issue 123. Before reporting the PR ready,
+check its published description for the intended issue link.
+
 Before publishing each revision, inspect the exact files and filenames being
 published for the personal information and secrets described below. Open
 screenshots and other visual files when they are included. Remove sensitive
