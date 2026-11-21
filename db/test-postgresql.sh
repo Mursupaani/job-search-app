@@ -21,7 +21,19 @@ for attempt in {1..30}; do
     sleep 1
 done
 
-docker exec --interactive "$container" psql -X --set=ON_ERROR_STOP=1 \
-    --username=postgres --dbname=job_search_test --file=- < db/migrations/001_accounts_and_job_postings.sql
-docker exec --interactive "$container" psql -X --set=ON_ERROR_STOP=1 \
-    --username=postgres --dbname=job_search_test --file=- < db/tests/save_job_postings.sql
+run_sql() {
+    docker exec --interactive "$container" psql -X --set=ON_ERROR_STOP=1 \
+        --username=postgres --dbname=job_search_test --file=-
+}
+
+run_sql < db/migrations/001_accounts_and_job_postings.sql
+if [[ "${1:-}" == --verify-password ]]; then
+    run_sql < db/migrations/002_account_passwords.sql
+    test_image=$(docker build --quiet server)
+    # Share PostgreSQL's loopback interface without publishing a database port.
+    docker run --rm --network "container:$container" \
+        --env PGHOST=127.0.0.1 --env PGUSER=postgres --env PGDATABASE=job_search_test \
+        "$test_image"
+else
+    run_sql < db/tests/save_job_postings.sql
+fi
