@@ -1,5 +1,22 @@
 # Job Search App review guidance
 
+## Communication preferences
+
+- Keep routine steps quiet. Send a progress update when a finding changes the
+  approach, you're blocked, or you need a decision from me.
+- Lead with what matters most to me. For an app change, say what I'll notice.
+  For a review, lead with the most important finding. Aim for a final reply I
+  can read in 30 seconds. A trivial edit may need only one sentence.
+- When a code detail helps me understand or predict the app's behavior, weave
+  it into the result in plain language. For a bug, connect one concrete action
+  to its cause and fix. Link to the relevant code when useful. Skip concepts
+  you've already explained in this conversation unless the change adds
+  something new.
+- Use one line to say what you checked and whether it passed. Flag anything
+  important that's still unverified or needs my decision.
+- Give a deeper walkthrough when I ask. Skip recaps, file-by-file summaries,
+  and closing offers to explain more.
+
 ## Tool use
 
 Use command-line tools first for all project work, including `git` and `gh`
@@ -18,11 +35,33 @@ inform the proposed approach.
 
 ## Before publishing changes to GitHub
 
+Before starting issue work or opening a pull request, follow the
+[GitHub delivery rules](HARNESS.md#github-issues-review-and-delivery).
+Find or create the issue the change addresses. Open the PR through
+`gh workflow run open-development-pr.yml --ref main`, passing the branch,
+title, and body. Include the issue link in the body. Use `Closes #123` when
+merging the PR should close issue 123. The workflow opens the PR as the
+GitHub Actions bot so the maintainer can approve it. A local `gh pr create`
+uses the signed-in account and can prevent that account from approving.
+If the workflow fails, diagnose it and retry through the bot. After opening,
+verify the bot author and the intended issue link on the published PR.
+
 Before publishing each revision, inspect the exact files and filenames being
 published for the personal information and secrets described below. Open
 screenshots and other visual files when they are included. Remove sensitive
 details or replace them with fictional values before pushing a branch or
 creating a commit directly on GitHub.
+
+## After opening or updating a pull request
+
+A request to open or update a PR includes following it through to human review.
+Follow the [delivery rules](HARNESS.md#github-issues-review-and-delivery)
+without waiting for another prompt. Watch CI on the latest commit. Once CI
+passes, post `@codex review` unless a review has already been requested or
+completed for that commit. Wait for the published Codex verdict. Address
+in-scope failures or findings and repeat the checks for each new commit.
+Ask for human approval when both CI and the verdict pass on the latest commit.
+If progress requires the user's help, report the specific blocker.
 
 ## Code Review Rules
 
