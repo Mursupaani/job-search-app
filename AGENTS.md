@@ -31,6 +31,17 @@ screenshots and other visual files when they are included. Remove sensitive
 details or replace them with fictional values before pushing a branch or
 creating a commit directly on GitHub.
 
+## After opening or updating a pull request
+
+A request to open or update a PR includes following it through to human review.
+Follow the [delivery rules](HARNESS.md#github-issues-review-and-delivery)
+without waiting for another prompt. Watch CI on the latest commit. Once CI
+passes, post `@codex review` unless a review has already been requested or
+completed for that commit. Wait for the published Codex verdict. Address
+in-scope failures or findings and repeat the checks for each new commit.
+Ask for human approval when both CI and the verdict pass on the latest commit.
+If progress requires the user's help, report the specific blocker.
+
 ## Code Review Rules
 
 ### Check every change for personal information and secrets
