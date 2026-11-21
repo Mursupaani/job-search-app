@@ -8,6 +8,14 @@ the task, explain to the user what the CLI could not do and why you need the
 alternative before attempting to use it. This includes opening a browser or
 triggering a browser access prompt.
 
+## Before starting work or making recommendations
+
+Before starting work on any issue or recommending a workflow or dependency,
+check applicable industry standards and current best practices. Use primary
+sources such as standards bodies, official documentation, and security
+guidance. Explain what applies to this project and cite the sources that
+inform the proposed approach.
+
 ## Before publishing changes to GitHub
 
 Before publishing each revision, inspect the exact files and filenames being
