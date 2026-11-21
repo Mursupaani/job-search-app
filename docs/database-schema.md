@@ -22,6 +22,31 @@ The sign-in issue adds the account fields listed below.
 Later posting features add the remaining fields and relationships described
 below.
 
+### Run the first migration exercise
+
+The project uses PostgreSQL 19.0 for this exercise. Local runs and the
+**Repository smoke check** use the same official image release pinned by
+digest in `db/test-postgresql.sh`. The digest identifies a specific image build.
+To upgrade PostgreSQL, update the version and digest together and rerun the
+exercise.
+
+With Docker running, run this command from the repository root.
+
+```sh
+bash db/test-postgresql.sh
+```
+
+The command starts an isolated container with a fresh `job_search_test`
+database, applies the [two-table migration](../db/migrations/001_accounts_and_job_postings.sql),
+runs the [SQL test](../db/tests/save_job_postings.sql), and removes the container
+on exit. `psql` is PostgreSQL's command-line client. Its `\gset` command saves
+a query's result for reuse, including the IDs returned by `INSERT`.
+
+Expect one foreign-key error for the fictional owner ID `0` followed by three
+passing rows. The test checks that the error code is `23503` and exits
+unsuccessfully if an assertion fails. In GitHub, open **Repository smoke
+check** and expand **Test saving job postings in PostgreSQL** for the same output.
+
 ## Ownership of linked records
 
 Relationships between account-owned records must stay within one account. For
