@@ -718,6 +718,8 @@ The later [Google Drive backup and restore procedure](docs/deferred-integrations
   the built-in GitHub Actions bot to open pull requests. The user reviews with
   their existing account. Each issue describes the expected behavior, how to
   verify it, and what the user will learn about the stack.
+- Follow the [standards and best-practices check](AGENTS.md#before-starting-work-or-making-recommendations)
+  before starting work on any issue or recommending a workflow or dependency.
 - Link every PR to the GitHub issue it addresses in the PR description.
 - Require two sign-offs on the latest revision before merging. For the prototype,
   Codex waits for CI to pass on the commit it intends to present, then posts
