@@ -30,6 +30,16 @@ test("verify a fictional account password using PostgreSQL", async (t) => {
     assert.equal(await verifyAccountPassword(client, "fictional-unknown", password), null);
   });
 
+  await t.test("PostgreSQL accepts usernames at both length limits", async () => {
+    for (const validUsername of ["a-1", `${"a".repeat(30)}-1`]) {
+      const { rowCount } = await client.query(
+        "UPDATE accounts SET username = $1 WHERE id = $2",
+        [validUsername, account.id],
+      );
+      assert.equal(rowCount, 1);
+    }
+  });
+
   await t.test("PostgreSQL rejects usernames outside the allowed format", async () => {
     const invalidUsernames = [
       "",
